@@ -1,0 +1,10 @@
+U:\3. Semester\M226\Visual Studio Aufgaben\11.19.2015\Kassenautomat\Businesslogik\obj\Debug\Businesslogic.csprojResolveAssemblyReference.cache
+U:\3. Semester\M226\Visual Studio Aufgaben\11.19.2015\Kassenautomat\Businesslogik\obj\Debug\Businesslogik.dll
+U:\3. Semester\M226\Visual Studio Aufgaben\11.19.2015\Kassenautomat\Businesslogik\bin\Debug\Businesslogik.dll
+U:\3. Semester\M226\Visual Studio Aufgaben\11.19.2015\Kassenautomat\Businesslogik\bin\Debug\Businesslogik.pdb
+U:\3. Semester\M226\Visual Studio Aufgaben\11.19.2015\Kassenautomat\Businesslogik\obj\Debug\Businesslogik.pdb
+H:\3. Semester\M226\Visual Studio Aufgaben\Petrol Station\Kassenautomat\Businesslogik\bin\Debug\Businesslogik.dll
+H:\3. Semester\M226\Visual Studio Aufgaben\Petrol Station\Kassenautomat\Businesslogik\bin\Debug\Businesslogik.pdb
+H:\3. Semester\M226\Visual Studio Aufgaben\Petrol Station\Kassenautomat\Businesslogik\obj\Debug\Businesslogic.csprojResolveAssemblyReference.cache
+H:\3. Semester\M226\Visual Studio Aufgaben\Petrol Station\Kassenautomat\Businesslogik\obj\Debug\Businesslogik.dll
+H:\3. Semester\M226\Visual Studio Aufgaben\Petrol Station\Kassenautomat\Businesslogik\obj\Debug\Businesslogik.pdb
