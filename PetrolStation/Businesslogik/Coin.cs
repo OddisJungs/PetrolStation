@@ -8,7 +8,7 @@ namespace PetrolStation.Businesslogic
 {
     public class Coin
     {
-        //Konsrtruktor
+        //Konstruktor
         public Coin(int pquantity, int pminPercent, int pmaxQuantity, int pmaxPercent, int pworth)
         {
             quantity = pquantity;
@@ -48,7 +48,7 @@ namespace PetrolStation.Businesslogic
 
         public void RemoveQuantityOfUserInputToQuantity()
         {
-            quantity += quantityOfUserInput;
+            quantity -= quantityOfUserInput;
             quantityOfUserInput = 0;
         }
 
