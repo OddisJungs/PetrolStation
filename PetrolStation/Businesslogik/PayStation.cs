@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PetrolStation.Businesslogic
 {
+    /// <summary>
+    /// Hauptklasse Paystation
+    /// </summary>
     public class PayStation
     {
         //Konstruktor
