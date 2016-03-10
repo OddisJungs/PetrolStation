@@ -31,7 +31,7 @@ namespace Businesslogik
 
         public void SetPricePerLiter(int pprice)
         {
-
+            pricePerLiter = pprice;
         }
     }
 }

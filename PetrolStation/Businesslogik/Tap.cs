@@ -11,21 +11,22 @@ namespace PetrolStation.Businesslogic
         // Konstruktor
         public Tap()
         {
-
+            isLocked = false;
         }
 
         // private members
         private bool isLocked;
+        private PetrolTank tank;
         
         // public methods
         public void Lock()
         {
-
+            isLocked = true;
         }
 
         public void Unlock()
         {
-
+            isLocked = false;
         }
 
     }

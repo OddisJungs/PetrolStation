@@ -43,6 +43,7 @@
     <Compile Include="FuelStation.cs" />
     <Compile Include="PayStation.cs" />
     <Compile Include="Coin.cs" />
+    <Compile Include="PayStationPetrolPumpInterceptor.cs" />
     <Compile Include="PetrolPump.cs" />
     <Compile Include="PetrolTank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

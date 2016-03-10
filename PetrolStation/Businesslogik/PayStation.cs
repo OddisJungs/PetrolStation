@@ -38,9 +38,9 @@ namespace PetrolStation.Businesslogic
 
         //Private
         private List<Coin> coins;
+        private int id;
         private const int maxTotalCoins = 500;
         private int stationNumber;
-
 
         //Puplic
         public void InsertCoin(int pcoin)

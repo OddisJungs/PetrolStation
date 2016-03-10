@@ -27,12 +27,12 @@ namespace PetrolStation.Businesslogic
 
         public int GetId()
         {
-            return 0;
+            return id;
         }
 
         public void SetAmountToPayToZero()
         {
-
+            amountToPay = 0;
         }
 
         public void SetDisplay()
