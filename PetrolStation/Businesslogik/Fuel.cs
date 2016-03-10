@@ -8,14 +8,15 @@ namespace Businesslogik
     public class Fuel
     {
         // Konstruktor
-        public Fuel()
+        public Fuel(string pfueltype, int ppricePerLiter)
         {
-
+            fueltype = pfueltype;
+            pricePerLiter = ppricePerLiter;
         }
 
         // private member
         private string fueltype;
-        private int PricePerLiter;
+        private int pricePerLiter;
 
         // public methods
         public string GetFuelType()
@@ -30,7 +31,7 @@ namespace Businesslogik
 
         public void SetPricePerLiter(int pprice)
         {
-
+            pricePerLiter = pprice;
         }
     }
 }
