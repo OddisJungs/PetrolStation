@@ -1,0 +1,59 @@
+@startuml
+
+skinparam classBackgroundColor #F8F8F8
+skinparam classBorderColor #0066CC
+skinparam classArrowColor #0066CC
+
+class Paystation {
+  - createReceipt()
+}
+
+class PetrolPump {
+	+ UnlockTaps() : void
+	+ amountToPay() : decimal
+}
+note left : Controls the access to the Taps,\nthe fuelling operation and the amount\n to pay at this pump 
+
+class Tap {
+	- locked : boolean
+}
+
+class FuelTank {
+	- fuelLevel : decimal
+}
+
+class Fueltype {
+	- name : string
+	- pricePerLiter : decimal
+}
+note right : maybe it is a good idea to \nimplement this as a struct
+
+class Receipt {
+
+}
+
+class PumpController {
+	- instance : PumpController
+	- pumps : List<PetrolPump>
+	- Mediator()
+	+ GetInstance() : PumpController
+	+ UnlockPump(ppumpId : int) : void
+	+ GetAmountToPay(ppumpId : int) : decimal
+}
+
+class Paystation { 
+   
+}
+
+class MoneyContainer {
+
+}
+
+
+PumpController "1" --* "*" PetrolPump
+Paystation .right..> PumpController : Calls
+Paystation "1" -right-* "*" MoneyContainer
+PetrolPump "1" -left-* "*" Tap
+Tap "1" -left-* "*" FuelTank
+FuelTank "1" --* "*" Fueltype
+@enduml 
