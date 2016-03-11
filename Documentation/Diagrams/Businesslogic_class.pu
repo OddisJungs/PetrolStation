@@ -1,59 +1,92 @@
 @startuml
-
+skinparam dpi 250
 skinparam classBackgroundColor #F8F8F8
 skinparam classBorderColor #0066CC
 skinparam classArrowColor #0066CC
 
 class Paystation {
-  - createReceipt()
+  	- amountToPay : decimal
+  	- createReceipt()
+  	+ ReturnBackMoney() : decimal
+  	+ SetAmountToPay(ppumpId : int) : decimal
+  	+ PayMoney(pworth : decimal)
+  	+ PayStation()
 }
 
 class PetrolPump {
 	+ UnlockTaps() : void
-	+ amountToPay() : decimal
+	+ GetAmountToPay() : decimal
+	+ Fuelling(Tap) : void
+	- lockTaps() : void
 }
-note left : Controls the access to the Taps,\nthe fuelling operation and the amount\n to pay at this pump 
+note right : Controls the access to the Taps,\nthe fuelling operation and the amount\n to pay at this pump\n 
 
 class Tap {
+    - fuellingMethod : Action
 	- locked : boolean
+	+ Take() : void
 }
+note bottom: When Take() method called,\n it will calls the fuellingMethod,\nwhich contains the Fuelling Method of his PetrolPump \nand overgives himself to ther\nlook at \nhttp://stackoverflow.com/questions/7923343/delegate-with-parameters-as-a-parameter
 
 class FuelTank {
+	- maxLevel : decimal
 	- fuelLevel : decimal
+	- lowCriticalVolumePercent : decimal
+	- highCriticalVolumePercent : decimal
+	+ DecreaseFuelLevel(pamount) : void 
 }
 
 class Fueltype {
 	- name : string
 	- pricePerLiter : decimal
 }
-note right : maybe it is a good idea to \nimplement this as a struct
+note top : maybe it is a good idea to \nimplement this as a struct
 
 class Receipt {
-
+	- createdAt : datetime
+	- amountToPay : decimal
+	+ Receipt(amountToPay : datetime, createdAt : datetime)
 }
 
 class PumpController {
 	- instance : PumpController
 	- pumps : List<PetrolPump>
-	- Mediator()
+	- PumpController()
+	+ AddPump(ppetrolPump : PetrolPump) : void
 	+ GetInstance() : PumpController
 	+ UnlockPump(ppumpId : int) : void
 	+ GetAmountToPay(ppumpId : int) : decimal
 }
-
-class Paystation { 
-   
-}
+note right: This is a Singleton
 
 class MoneyContainer {
-
+  - lowCriticalPercent : decimal
+  - maxCriticalPercent : decimal
+  - maxCount : int
+  - count : int
+  - worth : decimal
+  + GetWorth() : decimal
+  + IncreaseCount()
+  + SetCount(pamount : int)
+  + MoneyContainer(pworth : decimal, pcount : int,\npmaxCount : decimal, maxCritPercent : decimal, lowCritPercent : decimal)
+  - CheckCiticalPercent() : void
+  
 }
+note left: coinWorth is in fr
 
+class DataContainer {
+	+ Load()
+	+ Save()
+}
+note right: Controlls the acces to the stored data
 
 PumpController "1" --* "*" PetrolPump
-Paystation .right..> PumpController : Calls
+Paystation ...right....> PumpController : Calls
 Paystation "1" -right-* "*" MoneyContainer
-PetrolPump "1" -left-* "*" Tap
-Tap "1" -left-* "*" FuelTank
-FuelTank "1" --* "*" Fueltype
+Paystation .up.> Receipt : creates
+PetrolPump "1" --* "*" Tap
+Tap "1" -right-* "*" FuelTank
+FuelTank "1" -right-* "*" Fueltype
+
+Tap .up.> PetrolPump : Take() calls Fuelling() as delegate
 @enduml 
