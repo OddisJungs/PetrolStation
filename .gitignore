@@ -1,3 +1,6 @@
 /PetrolStation/Businesslogik/bin/
 /PetrolStation/Businesslogik/obj/
 PetrolStation/.vs/PetrolStation/v14/.suo
+PetrolStation/Petrolstation/Petrolstation.Businesslogic/obj/*
+PetrolStation/Petrolstation/Petrolstation.Businesslogic/obj/Debug/*
+*.cache
