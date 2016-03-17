@@ -42,10 +42,10 @@ class Fueltype {
 }
 note top : maybe it is a good idea to \nimplement this as a struct
 
-class Receipt {
+class Quittance {
 	- createdAt : datetime
 	- amountToPay : decimal
-	+ Receipt(amountToPay : datetime, createdAt : datetime)
+	+ Quittance(amountToPay : datetime, createdAt : datetime)
 }
 
 class PumpController {
@@ -83,10 +83,10 @@ note right: Controlls the acces to the stored data
 PumpController "1" --* "*" PetrolPump
 Paystation ...right....> PumpController : Calls
 Paystation "1" -right-* "*" MoneyContainer
-Paystation .up.> Receipt : creates
+Paystation .up.> Quittance : creates
 PetrolPump "1" --* "*" Tap
-Tap "1" -right-* "*" FuelTank
-FuelTank "1" -right-* "*" Fueltype
+Tap "*" -right-* "1" FuelTank
+FuelTank "*" -right-* "1" Fueltype
 
 Tap .up.> PetrolPump : Take() calls Fuelling() as delegate
 @enduml 
