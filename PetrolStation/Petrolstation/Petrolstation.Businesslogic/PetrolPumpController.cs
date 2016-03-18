@@ -8,16 +8,16 @@ namespace Petrolstation.Businesslogic
 {
     public class PetrolPumpController
     {
+        // private members
+        private static PetrolPumpController instance;
+
+        private List<PetrolPump> petrolPumps;
+
         // Private Konstruktor
         private PetrolPumpController()
         {
             petrolPumps = new List<PetrolPump>();
         }
-
-        // private members
-        private static PetrolPumpController instance;
-
-        private List<PetrolPump> petrolPumps;
 
         // public methods
         public static PetrolPumpController GetInstance()

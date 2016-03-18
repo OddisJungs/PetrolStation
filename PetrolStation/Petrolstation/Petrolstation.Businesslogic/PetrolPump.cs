@@ -8,6 +8,10 @@ namespace Petrolstation.Businesslogic
 {
     public class PetrolPump
     {
+        // private members
+        private int petrolPumpId;
+        private List<Tap> taps;
+
         // Constructor
         public PetrolPump()
         {
@@ -16,10 +20,6 @@ namespace Petrolstation.Businesslogic
             PetrolPumpController.GetInstance().AddPump(this);
             taps = new List<Tap>();
         }
-
-        // private members
-        private int petrolPumpId;
-        private List<Tap> taps;
 
         // public methods
 

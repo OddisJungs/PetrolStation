@@ -8,6 +8,13 @@ namespace Petrolstation.Businesslogic
 {
     public class Tap
     {
+        
+
+        // private members
+        private Delegate fuellingMethod;
+        private FuelTank fuelTank;
+        private bool locked;
+
         // Constructor
         /// <summary>
         /// Constructs a Tap object
@@ -19,11 +26,6 @@ namespace Petrolstation.Businesslogic
             fuellingMethod = pfuellingMethod;
             fuelTank = pfueltank;
         }
-
-        // private members
-        private Delegate fuellingMethod;
-        private FuelTank fuelTank;
-        private bool locked;
 
         // public Methods
         public void Take()
