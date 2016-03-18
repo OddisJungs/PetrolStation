@@ -28,7 +28,7 @@ namespace Petrolstation.Businesslogic
 
         public void UnlockPump(int ppumpId)
         {
-            petrolpumps.Where(x => x.Id == )
+            //petrolpumps.Where(x => x. == )
         }
 
         public void AddPump(PetrolPump ppetrolPump)
