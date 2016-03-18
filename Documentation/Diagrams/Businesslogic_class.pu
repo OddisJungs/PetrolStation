@@ -1,5 +1,5 @@
 @startuml
-skinparam dpi 250
+'skinparam dpi 250'
 skinparam classBackgroundColor #F8F8F8
 skinparam classBorderColor #0066CC
 skinparam classArrowColor #0066CC
@@ -14,7 +14,9 @@ class Paystation {
 }
 
 class PetrolPump {
+        - petrolPumpId : int
 	+ UnlockTaps() : void
+        + GetPetrolPumpId() int
 	+ GetAmountToPay() : decimal
 	+ Fuelling(Tap) : void
 	- lockTaps() : void
