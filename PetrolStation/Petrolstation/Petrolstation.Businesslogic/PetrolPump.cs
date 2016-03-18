@@ -11,13 +11,23 @@ namespace Petrolstation.Businesslogic
         // Constructor
         public PetrolPump()
         {
+            // Add himself to the PetrolPumpController
+            petrolPumpId = 0;
             PetrolPumpController.GetInstance().AddPump(this);
+            taps = new List<Tap>();
         }
 
         // private members
         private int petrolPumpId;
+        private List<Tap> taps;
 
         // public methods
+
+        public void AddTap(Tap ptap)
+        {
+            taps.Add(ptap);
+        }
+       
         public void SetId(int ppumpId)
         {
             petrolPumpId = ppumpId;
@@ -26,6 +36,19 @@ namespace Petrolstation.Businesslogic
         public int GetId()
         {
             return petrolPumpId;
+        }
+
+        public void Fuelling(Tap ptap)
+        {
+            foreach(Tap oneTap in taps)
+            {
+                if (oneTap != ptap)
+                {
+                    oneTap.Lock();
+                }
+            }
+
+            // Do fuelling
         }
     }
 }

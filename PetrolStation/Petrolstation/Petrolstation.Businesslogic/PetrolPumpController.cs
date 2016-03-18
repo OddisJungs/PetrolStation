@@ -40,6 +40,5 @@ namespace Petrolstation.Businesslogic
             ppetrolPump.SetId(petrolPumpId);
             petrolPumps.Add(ppetrolPump);
         }
-
     }
 }
