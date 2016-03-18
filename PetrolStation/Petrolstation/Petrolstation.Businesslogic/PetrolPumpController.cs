@@ -14,7 +14,7 @@ namespace Petrolstation.Businesslogic
         // private members
         private static PetrolPumpController instance;
 
-        private Dictionary<int, PetrolPump> petrolpumps;
+        private List<PetrolPump> petrolPumps;
 
         // public methods
         public PetrolPumpController GetInstance()
@@ -26,16 +26,16 @@ namespace Petrolstation.Businesslogic
             return instance;
         }
 
-        public void UnlockPump(int ppumpId)
+        public PetrolPumpController UnlockPump(int ppumpId)
         {
-            petrolpumps.Where(x => x.Id == )
+            return petrolPumps.Where(x => x.Id == ppumpId).First();
         }
 
         public void AddPump(PetrolPump ppetrolPump)
         {
-            int lastKey = petrolpumps.Keys.Last();
-            lastKey += 1;
-            petrolpumps.Add(lastKey, ppetrolPump);
+            int petrolPumpId = petrolPumps.Count();
+            petrolPumps.SetKey()
+            petrolPumps.Add(ppetrolPump);
         }
 
     }
