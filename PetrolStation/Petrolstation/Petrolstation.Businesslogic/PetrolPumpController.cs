@@ -29,15 +29,21 @@ namespace Petrolstation.Businesslogic
             return instance;
         }
 
-        public PetrolPump UnlockPump(int ppumpId)
+        public void ResetAndUnlockPump(int ppumpId)
         {
-            return petrolPumps.Where(x => x.GetId() == ppumpId).FirstOrDefault();
+            PetrolPump pump = petrolPumps.Where(x => x.GetId() == ppumpId).FirstOrDefault();
+            pump.ResetAmountToPay();
+        }
+
+        public int GetAmountToPay(int ppumpId)
+        {
+            return petrolPumps.Where(x => x.GetId() == ppumpId).First().GetAmountToPay();
         }
 
         public void AddPump(PetrolPump ppetrolPump)
         {
             int petrolPumpId = petrolPumps.Count();
-            ppetrolPump.SetId(petrolPumpId);
+            ppetrolPump.SetId(petrolPumpId + 1);
             petrolPumps.Add(ppetrolPump);
         }
     }
