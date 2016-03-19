@@ -52,5 +52,10 @@ namespace Petrolstation.Businesslogic
         {
             return fuelTank.GetPricePerLiter();
         }
+
+        public string GetFuelTypeName()
+        {
+            return fuelTank.GetFuelTypeName();
+        }
     }
 }
