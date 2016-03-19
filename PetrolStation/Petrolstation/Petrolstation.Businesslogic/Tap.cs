@@ -42,5 +42,15 @@ namespace Petrolstation.Businesslogic
         {
             locked = false;
         }
+
+        public void DecreaseFuelLevelOfTank(int pamount)
+        {
+            fuelTank.DecreaseFuelLevel(pamount);
+        }
+
+        public int GetPricePerLiter()
+        {
+            return fuelTank.GetPricePerLiter();
+        }
     }
 }

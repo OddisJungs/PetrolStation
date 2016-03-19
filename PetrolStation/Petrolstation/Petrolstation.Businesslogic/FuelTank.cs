@@ -30,5 +30,9 @@ namespace Petrolstation.Businesslogic
             fuelLevel = fuelLevel - pamount;
         }
 
+        public int GetPricePerLiter()
+        {
+            return fuelType.GetPricePerLiter();
+        }
     }
 }

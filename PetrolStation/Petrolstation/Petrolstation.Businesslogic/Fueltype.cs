@@ -18,5 +18,10 @@ namespace Petrolstation.Businesslogic
             name = pname;
             pricePerLiter = ppricePerLiter;
         }
+
+        public int GetPricePerLiter()
+        {
+            return pricePerLiter;
+        }
     }
 }

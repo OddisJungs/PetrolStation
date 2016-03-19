@@ -9,7 +9,9 @@ namespace Petrolstation.Businesslogic
     public class PetrolPump
     {
         // private members
+        private const int tankSpeed = 50; // How Many ml per second are tanked
         private int petrolPumpId;
+        private int amountToPay;
         private List<Tap> taps;
 
         // Constructor
@@ -48,7 +50,14 @@ namespace Petrolstation.Businesslogic
                 }
             }
 
-            // Do fuelling
+            amountToPay = ptap.GetPricePerLiter();
+            // Do fuelling 
+            for (int i = 0; i < 15; i++)
+            {
+                amountToPay += (ptap.GetPricePerLiter() * (tankSpeed/1000));
+                ptap.DecreaseFuelLevelOfTank(tankSpeed);
+                System.Threading.Thread.Sleep(1000);
+            }
         }
     }
 }
