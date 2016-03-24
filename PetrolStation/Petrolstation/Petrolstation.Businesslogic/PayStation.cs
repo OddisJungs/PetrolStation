@@ -12,6 +12,7 @@ namespace Petrolstation.Businesslogic
         private List<MoneyContainer> moneyContainers;
         private int amountToPay;
         private int currentSelectedPumpId;
+        private int returnMoney;
 
         // Konstruktor
         public PayStation()
@@ -30,6 +31,7 @@ namespace Petrolstation.Businesslogic
             moneyContainers.Add(new MoneyContainer(10000, 500, 15.5, 88.5));
             moneyContainers.Add(new MoneyContainer(20000, 500, 15.5, 88.5));
             moneyContainers.Add(new MoneyContainer(100000, 500, 15.5, 88.5));
+            moneyContainers = moneyContainers.OrderByDescending(x => x.GetWorth()).ToList();
         }
 
         public void SetAmountToPay(int ppumpId)
@@ -51,10 +53,15 @@ namespace Petrolstation.Businesslogic
             }
 
             // If lower than 0 the he payed enough
-            if(amountToPay < 0)
+            if(amountToPay <= 0)
             {
                 // Return Money logic
+                returnMoney = amountToPay * -1;
+                amountToPay = 0;
+
+                PetrolPumpController.GetInstance().ResetAndUnlockPump(currentSelectedPumpId);
                 CreateQuittance();
+                ReturnBackMoney();
             }
         }
 
@@ -62,5 +69,22 @@ namespace Petrolstation.Businesslogic
         {
             // Do something
         }
+
+        private void ReturnBackMoney()
+        {
+            while (returnMoney != 0)
+            {
+                foreach (MoneyContainer item in moneyContainers)
+                {
+                    if (item.GetWorth() <= returnMoney)
+                    {
+                        returnMoney -= item.GetWorth();
+                        item.DecreaseCount();
+                    }
+                }
+            }
+
+        }
+
     }
 }

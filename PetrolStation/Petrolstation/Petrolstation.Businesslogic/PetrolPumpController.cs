@@ -33,6 +33,7 @@ namespace Petrolstation.Businesslogic
         {
             PetrolPump pump = petrolPumps.Where(x => x.GetId() == ppumpId).FirstOrDefault();
             pump.ResetAmountToPay();
+            pump.UnlockTaps();
         }
 
         public int GetAmountToPay(int ppumpId)

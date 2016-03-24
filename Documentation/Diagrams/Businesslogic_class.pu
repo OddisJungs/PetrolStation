@@ -5,48 +5,65 @@ skinparam classBorderColor #0066CC
 skinparam classArrowColor #0066CC
 
 class Paystation {
-  	- amountToPay : decimal
-  	- createReceipt()
-  	+ ReturnBackMoney() : decimal
-  	+ SetAmountToPay(ppumpId : int) : decimal
-  	+ PayMoney(pworth : decimal)
+  	- amountToPay : int
+        - currentSelectPumpId : int
+        - returnMoney : int
+  	- createQuittance()
+  	+ ReturnBackMoney()
+  	+ SetAmountToPay(ppumpId : int)
+  	+ PayMoney(pworth : int)
   	+ PayStation()
 }
 
 class PetrolPump {
         - petrolPumpId : int
-	+ UnlockTaps() : void
-        + GetPetrolPumpId() int
+        - tankspeed : int
+        - amountToPlay : int
+        + AddTap(ptap : Tap)
+        + SetId(ppumpId : int)
+        + GetId() : int
+	+ UnlockTaps() 
 	+ GetAmountToPay() : decimal
-	+ Fuelling(Tap) : void
-	- lockTaps() : void
+	+ Fuelling(ptap : Tap) 
+        + PetrolPump()
 }
 note right : Controls the access to the Taps,\nthe fuelling operation and the amount\n to pay at this pump\n 
 
 class Tap {
-    - fuellingMethod : Action
-	- locked : boolean
-	+ Take() : void
+       - fuellingMethod : Action
+        - locked : boolean
+	+ Take()
+        + Lock() 
+        + Unlock()
+        + DecreaseFuelLevelOfTank(pamount : int)
+        + GetPricePerLiter() : int
+        + GetFuelTypeName() : string
+        + Tap(pfuellingMethode : Action, pfuelTank : FuelTank)
 }
 note bottom: When Take() method called,\n it will calls the fuellingMethod,\nwhich contains the Fuelling Method of his PetrolPump \nand overgives himself to ther\nlook at \nhttp://stackoverflow.com/questions/7923343/delegate-with-parameters-as-a-parameter
 
 class FuelTank {
-	- maxLevel : decimal
-	- fuelLevel : decimal
+	- maxLevel : int
+	- fuelLevel : int
 	- lowCriticalVolumePercent : decimal
 	- highCriticalVolumePercent : decimal
 	+ DecreaseFuelLevel(pamount) : void 
+        + GetPricePerLiter() : int
+        + GetFuelTypeName() : string
+        + FuelTank(pmaxLevel : int, plowCriticalVolumePercent : decimal,  phighCriticalVolumePercent : decimal, pfuelType : Fueltype)
 }
 
 class Fueltype {
 	- name : string
 	- pricePerLiter : decimal
+        - GetPricePerLiter() : int 
+        - GetName() : string
 }
 note top : maybe it is a good idea to \nimplement this as a struct
 
 class Quittance {
 	- createdAt : datetime
-	- amountToPay : decimal
+	- amountToPay : int
 	+ Quittance(amountToPay : datetime, createdAt : datetime)
 }
 
@@ -54,10 +71,10 @@ class PumpController {
 	- instance : PumpController
 	- pumps : List<PetrolPump>
 	- PumpController()
-	+ AddPump(ppetrolPump : PetrolPump) : void
+	+ AddPump(ppetrolPump : PetrolPump)
 	+ GetInstance() : PumpController
-	+ UnlockPump(ppumpId : int) : void
-	+ GetAmountToPay(ppumpId : int) : decimal
+	+ ResetAndUnlockPump(ppumpId : int) 
+	+ GetAmountToPay(ppumpId : int) : int
 }
 note right: This is a Singleton
 
@@ -69,9 +86,9 @@ class MoneyContainer {
   - worth : decimal
   + GetWorth() : decimal
   + IncreaseCount()
-  + SetCount(pamount : int)
-  + MoneyContainer(pworth : decimal, pcount : int,\npmaxCount : decimal, maxCritPercent : decimal, lowCritPercent : decimal)
-  - CheckCiticalPercent() : void
+  + DecreaseCount()
+  + MoneyContainer(pworth : int, pcount : int,\npmaxCount : decimal, maxCritPercent : int, lowCritPercent : decimal)
+  + CheckCiticalPercent() 
   
 }
 note left: coinWorth is in fr

@@ -32,12 +32,12 @@ namespace Petrolstation.Businesslogic
 
         public void IncreaseCount()
         {
-            count--;
+            count++;
         }
 
         public void DecreaseCount()
         {
-            count++;
+            count--;
         }
 
         public void CheckCriticalPercent()
