@@ -4,6 +4,13 @@ skinparam classBackgroundColor #F8F8F8
 skinparam classBorderColor #0066CC
 skinparam classArrowColor #0066CC
 
+
+class UI {
+
+}
+UI ..> PaystationController : calls
+UI ..> PumpController : calls
+
 class Paystation {
   	- amountToPay : int
         - currentSelectPumpId : int
@@ -14,6 +21,11 @@ class Paystation {
   	+ PayMoney(pworth : int)
   	+ PayStation()
 }
+
+class PaystationController {
+
+}
+
 
 class PetrolPump {
         - petrolPumpId : int
@@ -93,19 +105,23 @@ class MoneyContainer {
 }
 note left: coinWorth is in fr
 
-class DataContainer {
+class DataItem {
 	+ Load()
 	+ Save()
 }
-note right: Controlls the acces to the stored data
+note right: Implements the access to the stored data
 
 PumpController "1" --* "*" PetrolPump
-Paystation ...right....> PumpController : Calls
 Paystation "1" -right-* "*" MoneyContainer
 Paystation .up.> Quittance : creates
 PetrolPump "1" --* "*" Tap
-Tap "*" -right-* "1" FuelTank
+Tap "*" -right-o "1" FuelTank
 FuelTank "*" -right-* "1" Fueltype
+Quittance ---|> DataItem
+Paystation ---|> DataItem
+PetrolPump ---|> DataItem
+FuelTank ---|> DataItem
+PaystationController "1" ---* "*" Paystation
 
 Tap .up.> PetrolPump : Take() calls Fuelling() as delegate
 @enduml 
