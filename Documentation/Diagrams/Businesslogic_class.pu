@@ -12,14 +12,14 @@ UI ..> PaystationController : calls
 UI ..> PumpController : calls
 
 class Paystation {
-  	- amountToPay : int
+        - amountToPay : int
         - currentSelectPumpId : int
         - returnMoney : int
-  	- createQuittance()
-  	+ ReturnBackMoney()
-  	+ SetAmountToPay(ppumpId : int)
-  	+ PayMoney(pworth : int)
-  	+ PayStation()
+        - createQuittance()
+        + ReturnBackMoney()
+        + SetAmountToPay(ppumpId : int)
+        + PayMoney(pworth : int)
+        + PayStation()
 }
 
 class PaystationController {
@@ -34,17 +34,17 @@ class PetrolPump {
         + AddTap(ptap : Tap)
         + SetId(ppumpId : int)
         + GetId() : int
-	+ UnlockTaps() 
-	+ GetAmountToPay() : decimal
-	+ Fuelling(ptap : Tap) 
+        + UnlockTaps() 
+        + GetAmountToPay() : decimal
+        + Fuelling(ptap : Tap) 
         + PetrolPump()
 }
 note right : Controls the access to the Taps,\nthe fuelling operation and the amount\n to pay at this pump\n 
 
 class Tap {
-       - fuellingMethod : Action
+        - fuellingMethod : Action
         - locked : boolean
-	+ Take()
+        + Take()
         + Lock() 
         + Unlock()
         + DecreaseFuelLevelOfTank(pamount : int)
@@ -55,38 +55,38 @@ class Tap {
 note bottom: When Take() method called,\n it will calls the fuellingMethod,\nwhich contains the Fuelling Method of his PetrolPump \nand overgives himself to ther\nlook at \nhttp://stackoverflow.com/questions/7923343/delegate-with-parameters-as-a-parameter
 
 class FuelTank {
-	- maxLevel : int
-	- fuelLevel : int
-	- lowCriticalVolumePercent : decimal
-	- highCriticalVolumePercent : decimal
-	+ DecreaseFuelLevel(pamount) : void 
+        - maxLevel : int
+        - fuelLevel : int
+        - lowCriticalVolumePercent : decimal
+        - highCriticalVolumePercent : decimal
+        + DecreaseFuelLevel(pamount) : void 
         + GetPricePerLiter() : int
         + GetFuelTypeName() : string
         + FuelTank(pmaxLevel : int, plowCriticalVolumePercent : decimal,  phighCriticalVolumePercent : decimal, pfuelType : Fueltype)
 }
 
 class Fueltype {
-	- name : string
-	- pricePerLiter : decimal
+        - name : string
+        - pricePerLiter : decimal
         - GetPricePerLiter() : int 
         - GetName() : string
 }
 note top : maybe it is a good idea to \nimplement this as a struct
 
 class Quittance {
-	- createdAt : datetime
-	- amountToPay : int
-	+ Quittance(amountToPay : datetime, createdAt : datetime)
+        - createdAt : datetime
+        - amountToPay : int
+        + Quittance(amountToPay : datetime, createdAt : datetime)
 }
 
 class PumpController {
-	- instance : PumpController
-	- pumps : List<PetrolPump>
-	- PumpController()
-	+ AddPump(ppetrolPump : PetrolPump)
-	+ GetInstance() : PumpController
-	+ ResetAndUnlockPump(ppumpId : int) 
-	+ GetAmountToPay(ppumpId : int) : int
+        - instance : PumpController
+        - pumps : List<PetrolPump>
+        - PumpController()
+        + AddPump(ppetrolPump : PetrolPump)
+        + GetInstance() : PumpController
+        + ResetAndUnlockPump(ppumpId : int) 
+        + GetAmountToPay(ppumpId : int) : int
 }
 note right: This is a Singleton
 
@@ -106,8 +106,8 @@ class MoneyContainer {
 note left: coinWorth is in fr
 
 class DataItem {
-	+ Load()
-	+ Save()
+        + Load()
+        + Save()
 }
 note right: Implements the access to the stored data
 
@@ -124,4 +124,4 @@ FuelTank ---|> DataItem
 PaystationController "1" ---* "*" Paystation
 
 Tap .up.> PetrolPump : Take() calls Fuelling() as delegate
-@enduml 
+@enduml
