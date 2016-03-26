@@ -15,7 +15,7 @@ namespace Petrolstation.Businesslogic
         private List<Tap> taps;
 
         // Constructor
-        public PetrolPump() : base(typeof(PetrolPump).Name)
+        public PetrolPump() : base()
         {
             // Add himself to the PetrolPumpController
             petrolPumpId = 0;

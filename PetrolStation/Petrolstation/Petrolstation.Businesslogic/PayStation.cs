@@ -15,7 +15,7 @@ namespace Petrolstation.Businesslogic
         private int returnMoney;
 
         // Konstruktor
-        public PayStation() : base(typeof(PayStation).Name)
+        public PayStation() : base()
         {
             moneyContainers = new List<MoneyContainer>();
             moneyContainers.Add(new MoneyContainer(5, 500, 15.5, 88.5));
