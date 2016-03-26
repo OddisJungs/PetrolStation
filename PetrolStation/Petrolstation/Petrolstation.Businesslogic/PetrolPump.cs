@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
-    public class PetrolPump
+    public class PetrolPump : DataItem
     {
         // private members
         private const int tankSpeed = 50; // How Many ml per second are tanked
@@ -15,7 +15,7 @@ namespace Petrolstation.Businesslogic
         private List<Tap> taps;
 
         // Constructor
-        public PetrolPump()
+        public PetrolPump() : base(typeof(PetrolPump).Name)
         {
             // Add himself to the PetrolPumpController
             petrolPumpId = 0;
