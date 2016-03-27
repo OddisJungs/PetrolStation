@@ -13,7 +13,35 @@ namespace Petrolstation.UserInterface
         {
             while (true)
             {
-                SelectOrCreatePump();
+                Console.WriteLine("Welcome To the Option Menu");
+                Console.WriteLine("Press 1: Create Fueltank");
+                Console.WriteLine("Press 2: Modify or Create PetrolPump");
+                Console.WriteLine("Press 3: Create PayStation");
+                string input = Console.ReadLine();
+                int selection;
+                bool parsingSuccessful = Int32.TryParse(input, out selection);
+                if (parsingSuccessful)
+                {
+                    switch (selection)
+                    {
+                        case 1:
+                            Console.WriteLine("Do Something");
+                            break;
+                        case 2:
+                            SelectOrCreatePump();
+                            break;
+                        case 3:
+                            Console.WriteLine("Do Something other");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!! INVALID INPUT !!!!!!!!!!!!!!!!!");
+                }
+                
             }
         }
 
@@ -37,7 +65,8 @@ namespace Petrolstation.UserInterface
             {
                 int pumpId;
                 Int32.TryParse(input, out pumpId);
-                PetrolPumpController.GetInstance().GetPump(pumpId);
+                PetrolPump pump = PetrolPumpController.GetInstance().GetPump(pumpId);
+                Console.Write(pump.GetAmountToPay());
             }
         }
         static private void SelectTap()
