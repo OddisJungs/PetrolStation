@@ -49,7 +49,6 @@ namespace Petrolstation.Businesslogic
                 if ((100 / maxLevel *pfuelLevel) <= lowCriticalVolumePercent)
                 {
                     decimal fuelLevelPercent = 100 / maxLevel * pfuelLevel;
-                    
                 }
             }
         }
