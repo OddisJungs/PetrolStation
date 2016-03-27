@@ -30,6 +30,11 @@ namespace Petrolstation.Businesslogic
         {
             taps.Add(ptap);
         }
+
+        public void AddTap(FuelTank pfuelTank)
+        {
+            taps.Add(new Tap(this.Fuelling, pfuelTank));
+        }
        
         public void SetId(int ppumpId)
         {
@@ -41,7 +46,7 @@ namespace Petrolstation.Businesslogic
             return petrolPumpId;
         }
 
-        public void Fuelling(Tap ptap)
+        public String Fuelling(Tap ptap)
         {
             foreach(Tap oneTap in taps)
             {
@@ -59,6 +64,8 @@ namespace Petrolstation.Businesslogic
                 ptap.DecreaseFuelLevelOfTank(tankSpeed);
                 System.Threading.Thread.Sleep(1000);
             }
+
+            return "";
         }
 
         public int GetAmountToPay()

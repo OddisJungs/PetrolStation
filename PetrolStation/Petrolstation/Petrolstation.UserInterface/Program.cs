@@ -11,9 +11,6 @@ namespace Petrolstation.UserInterface
     {
         static void Main(string[] args)
         {
-            PetrolPumpController pumpController = PetrolPumpController.GetInstance();
-            PayStationController payStationConroller = PayStationController.GetInstance();
-
             while (true)
             {
                 SelectOrCreatePump();
@@ -40,8 +37,7 @@ namespace Petrolstation.UserInterface
             {
                 int pumpId;
                 Int32.TryParse(input, out pumpId);
-                
-
+                PetrolPumpController.GetInstance().GetPump(pumpId);
             }
         }
         static private void SelectTap()
