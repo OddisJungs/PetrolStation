@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataItem.cs" />
     <Compile Include="FuelTank.cs" />
     <Compile Include="Fueltype.cs" />
     <Compile Include="MoneyContainer.cs" />

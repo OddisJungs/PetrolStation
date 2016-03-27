@@ -106,9 +106,13 @@ class MoneyContainer {
 note left: coinWorth is in fr
 
 class DataItem {
-        + Load()
         + Save()
 }
+
+class DataContext {
+    + LoadAllOfType()
+}
+
 note right: Implements the access to the stored data
 
 PumpController "1" --* "*" PetrolPump
@@ -122,6 +126,8 @@ Paystation ---|> DataItem
 PetrolPump ---|> DataItem
 FuelTank ---|> DataItem
 PaystationController "1" ---* "*" Paystation
+PumpController ..> DataContainer : LoadPumps
+PaystationController ..> DataContainer : LoadPayStations
 
 Tap .up.> PetrolPump : Take() calls Fuelling() as delegate
 @enduml
