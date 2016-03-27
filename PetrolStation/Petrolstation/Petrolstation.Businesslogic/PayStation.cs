@@ -68,6 +68,7 @@ namespace Petrolstation.Businesslogic
         private void CreateQuittance()
         {
             // Do something
+            
         }
 
         private void ReturnBackMoney()
