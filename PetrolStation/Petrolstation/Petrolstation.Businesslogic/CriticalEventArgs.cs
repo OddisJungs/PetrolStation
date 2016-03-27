@@ -10,7 +10,6 @@ namespace Petrolstation.Businesslogic
     {
         private int fuelLevel;
         private decimal fuelLevelPercent;
-        private bool snoozeOn = true;
 
         public CriticalEventArgs(int pfuelLevel, decimal pfuelLevelPercent)
         {

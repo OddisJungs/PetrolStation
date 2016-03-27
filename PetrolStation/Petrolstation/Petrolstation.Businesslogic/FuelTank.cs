@@ -15,7 +15,8 @@ namespace Petrolstation.Businesslogic
         private int fuelLevel;
         private decimal lowCriticalVolumePercent;
         private Fueltype fuelType;
-        public event EventHandler<CriticalEventArgs> CriticalEvent;
+        private bool IsCritical = false;
+        private decimal fuelLevelPercent;
 
         public FuelTank(int pmaxLevel, decimal plowCriticalVolumePercent, Fueltype pfuelType)
         {
@@ -25,11 +26,11 @@ namespace Petrolstation.Businesslogic
             fuelType = pfuelType;
         }
 
-
         public void DecreaseFuelLevel(int pamount)
         {
             fuelLevel = fuelLevel - pamount;
-            OnCriticalEventArgs(fuelLevel);
+            fuelLevelPercent = 100 / maxLevel * fuelLevel;
+            CheckIfCritical(fuelLevel);
         }
 
         public int GetPricePerLiter()
@@ -42,15 +43,16 @@ namespace Petrolstation.Businesslogic
             return fuelType.GetName();
         }
 
-        protected void OnCriticalEventArgs(int pfuelLevel)
+        public bool GetIsCritical()
         {
-            EventHandler<CriticalEventArgs> handler = CriticalEvent;
-            if (handler != null)
+            return IsCritical;
+        }
+
+        private void CheckIfCritical(int pfuelLevel)
+        {
+            if (fuelLevelPercent <= lowCriticalVolumePercent)
             {
-                if ((100 / maxLevel *pfuelLevel) <= lowCriticalVolumePercent)
-                {
-                    decimal fuelLevelPercent = 100 / maxLevel * pfuelLevel;
-                }
+                IsCritical = true;
             }
         }
     }
