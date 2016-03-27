@@ -1,51 +1,53 @@
 @startuml
-skinparam dpi 250
+skinparam dpi 70
 skinparam classBackgroundColor #F8F8F8
 skinparam classBorderColor #0066CC
 skinparam classArrowColor #0066CC
 
 class Paystation {
-  	- amountToPay : decimal
-  	- createReceipt()
-  	+ ReturnBackMoney() : decimal
-  	+ SetAmountToPay(ppumpId : int) : decimal
-  	+ PayMoney(pworth : decimal)
+  	- amountToPay : int
+  	- createQuittance()
+  	+ ReturnBackMoney() : int
+  	+ SetAmountToPay(ppumpId : int) : int
+  	+ PayMoney(pworth : int)
   	+ PayStation()
 }
 
 class PetrolPump {
+        - pumpId : int
+        - fueledVolume : int
 	+ UnlockTaps() : void
-	+ GetAmountToPay() : decimal
+	+ GetAmountToPay() : int
 	+ Fuelling(Tap) : void
-	- lockTaps() : void
+	+ LockTaps() : void
 }
 note right : Controls the access to the Taps,\nthe fuelling operation and the amount\n to pay at this pump\n 
 
 class Tap {
-    - fuellingMethod : Action
+        - fuellingMethod : Action
 	- locked : boolean
 	+ Take() : void
 }
 note bottom: When Take() method called,\n it will calls the fuellingMethod,\nwhich contains the Fuelling Method of his PetrolPump \nand overgives himself to ther\nlook at \nhttp://stackoverflow.com/questions/7923343/delegate-with-parameters-as-a-parameter
 
 class FuelTank {
-	- maxLevel : decimal
-	- fuelLevel : decimal
-	- lowCriticalVolumePercent : decimal
-	- highCriticalVolumePercent : decimal
+	- maxLevel : int
+	- fuelLevel : int
+	- lowCriticalVolumePercent : int
+	- highCriticalVolumePercent : int
 	+ DecreaseFuelLevel(pamount) : void 
 }
 
 class Fueltype {
 	- name : string
-	- pricePerLiter : decimal
+	- pricePerLiter : int
 }
 note top : maybe it is a good idea to \nimplement this as a struct
 
 class Quittance {
 	- createdAt : datetime
-	- amountToPay : decimal
-	+ Quittance(amountToPay : datetime, createdAt : datetime)
+	- amountToPay : int
+	+ Quittance(amountToPay : int, createdAt : datetime)
 }
 
 class PumpController {
@@ -55,24 +57,23 @@ class PumpController {
 	+ AddPump(ppetrolPump : PetrolPump) : void
 	+ GetInstance() : PumpController
 	+ UnlockPump(ppumpId : int) : void
-	+ GetAmountToPay(ppumpId : int) : decimal
+	+ GetAmountToPay(ppumpId : int) : int
 }
 note right: This is a Singleton
 
 class MoneyContainer {
-  - lowCriticalPercent : decimal
-  - maxCriticalPercent : decimal
+  - lowCriticalPercent : int
+  - maxCriticalPercent : int
   - maxCount : int
   - count : int
-  - worth : decimal
-  + GetWorth() : decimal
+  - worth : int
   + IncreaseCount()
   + SetCount(pamount : int)
-  + MoneyContainer(pworth : decimal, pcount : int,\npmaxCount : decimal, maxCritPercent : decimal, lowCritPercent : decimal)
-  - CheckCiticalPercent() : void
+  + MoneyContainer(pworth : int, pcount : int,\npmaxCount : int, maxCritPercent : int, lowCritPercent : int)
+  + CheckCriticalPercent() : void
   
 }
-note left: coinWorth is in fr
+note left: coinWorth is in Rappen
 
 class DataContainer {
 	+ Load()
