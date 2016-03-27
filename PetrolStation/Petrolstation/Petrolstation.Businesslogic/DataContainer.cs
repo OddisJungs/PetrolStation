@@ -28,15 +28,17 @@ namespace Petrolstation.Businesslogic
         {
             List<T> list = new List<T>();
             string filespath = Path.Combine(path ,typeof(T).Name);
-            foreach (string file in Directory.GetFiles(filespath))
-            {
-                using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
+            try {
+                foreach (string file in Directory.GetFiles(filespath))
                 {
-                    BinaryFormatter binaryFormatter = new BinaryFormatter();
-                    list.Add((T)binaryFormatter.Deserialize(fileStream));
+                    using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
+                    {
+                        BinaryFormatter binaryFormatter = new BinaryFormatter();
+                        list.Add((T)binaryFormatter.Deserialize(fileStream));
+                    }
                 }
             }
-
+            catch { }
             return list;
         }
 

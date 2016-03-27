@@ -49,6 +49,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Petrolstation.Businesslogic\Petrolstation.Businesslogic.csproj">
+      <Project>{5f45f1da-ca69-4255-ba19-d193d8adef0c}</Project>
+      <Name>Petrolstation.Businesslogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
