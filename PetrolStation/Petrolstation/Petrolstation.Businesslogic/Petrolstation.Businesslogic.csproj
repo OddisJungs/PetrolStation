@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FuelTank.cs" />
-    <Compile Include="Fueltype.cs" />
+    <Compile Include="FuelType.cs" />
     <Compile Include="PetrolPump.cs" />
     <Compile Include="PetrolPumpController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
