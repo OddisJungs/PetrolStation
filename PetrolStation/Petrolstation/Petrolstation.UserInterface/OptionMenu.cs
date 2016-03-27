@@ -12,9 +12,8 @@ namespace Petrolstation.UserInterface
         static internal void Show()
         {
             Console.WriteLine("Welcome To the Option Menu");
-            Console.WriteLine("Press 1: Create Fueltank");
-            Console.WriteLine("Press 2: Modify or Create PetrolPump");
-            Console.WriteLine("Press 3: Create PayStation");
+            Console.WriteLine("Press 1: Modify or Create PetrolPump");
+            Console.WriteLine("Press 2: Create PayStation");
             string input = Console.ReadLine();
             int selection;
             bool parsingSuccessful = Int32.TryParse(input, out selection);
@@ -23,12 +22,9 @@ namespace Petrolstation.UserInterface
                 switch (selection)
                 {
                     case 1:
-                        Console.WriteLine("Do Something");
-                        break;
-                    case 2:
                         ModifyOrCreatePump();
                         break;
-                    case 3:
+                    case 2:
                         Console.WriteLine("Do Something other");
                         break;
                     default:
@@ -38,6 +34,7 @@ namespace Petrolstation.UserInterface
             else
             {
                 Console.WriteLine("!!!!!!!!!!!!!!!!!!! INVALID INPUT !!!!!!!!!!!!!!!!!");
+                Show();
             }
         }
 
@@ -49,7 +46,7 @@ namespace Petrolstation.UserInterface
                 Console.Write(String.Format("{0} ", id));
             }
 
-            Console.Write(" }\n");
+            Console.WriteLine(" }");
             string input = Console.ReadLine();
             if (input.ToLower().Contains("create"))
             {
@@ -62,8 +59,16 @@ namespace Petrolstation.UserInterface
                 int pumpId;
                 Int32.TryParse(input, out pumpId);
                 PetrolPump pump = PetrolPumpController.GetInstance().GetPump(pumpId);
-                Console.Write(pump.GetAmountToPay());
+                // Not Finished ----------------------------------------------------------
+                ModifyOrCreateTap(pumpId);
             }
+        }
+
+        static internal void ModifyOrCreateTap(int ppumpId)
+        {
+            Console.Write("Current Selected PumpId: " + ppumpId);
+
+            ModifyOrCreatePump();
         }
     }
 }
