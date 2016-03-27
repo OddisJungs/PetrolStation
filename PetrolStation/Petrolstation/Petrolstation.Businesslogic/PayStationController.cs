@@ -17,6 +17,8 @@ namespace Petrolstation.Businesslogic
         private PayStationController()
         {
             payStations = new List<PayStation>();
+            DataContainer dataContext = new DataContainer();
+            payStations.AddRange(dataContext.Load<PayStation>());
         }
 
         // public methods

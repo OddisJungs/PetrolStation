@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContainer.cs" />
     <Compile Include="DataItem.cs" />
     <Compile Include="FuelTank.cs" />
     <Compile Include="Fueltype.cs" />
     <Compile Include="MoneyContainer.cs" />
     <Compile Include="PayStation.cs" />
+    <Compile Include="PayStationController.cs" />
     <Compile Include="PetrolPump.cs" />
     <Compile Include="PetrolPumpController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
