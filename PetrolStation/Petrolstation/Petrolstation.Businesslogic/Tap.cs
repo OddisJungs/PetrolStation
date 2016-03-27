@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
+    [Serializable]
     public class Tap
     {
-        
-
         // private members
         private Delegate fuellingMethod;
         private FuelTank fuelTank;

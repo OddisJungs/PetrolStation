@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
+    [Serializable]
     public class PetrolPump : DataItem
     {
         // private members
@@ -21,6 +22,7 @@ namespace Petrolstation.Businesslogic
             petrolPumpId = 0;
             PetrolPumpController.GetInstance().AddPump(this);
             taps = new List<Tap>();
+            Save();
         }
 
         // public methods

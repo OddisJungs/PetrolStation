@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
+    [Serializable]
     public class FuelTank
     {
         // Private attributes

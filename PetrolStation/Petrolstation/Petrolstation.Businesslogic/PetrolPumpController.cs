@@ -17,6 +17,13 @@ namespace Petrolstation.Businesslogic
         private PetrolPumpController()
         {
             petrolPumps = new List<PetrolPump>();
+            DataContainer datacontainer = new DataContainer();
+            List<PetrolPump> loadedPumps = datacontainer.Load<PetrolPump>();
+
+            foreach(PetrolPump pump in loadedPumps)
+            {
+                AddPump(pump);
+            }
         }
 
         // public methods
@@ -27,6 +34,17 @@ namespace Petrolstation.Businesslogic
                 instance = new PetrolPumpController();
             }
             return instance;
+        }
+
+        public List<int> GetListOfPumpIds()
+        {
+            List<int> pumpIds = new List<int>();
+            foreach(PetrolPump pump in petrolPumps)
+            {
+                pumpIds.Add(pump.GetId());
+            }
+
+            return pumpIds;
         }
 
         public void ResetAndUnlockPump(int ppumpId)

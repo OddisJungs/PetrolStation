@@ -11,9 +11,30 @@ namespace Petrolstation.UserInterface
     {
         static void Main(string[] args)
         {
-            PetrolPumpController pumpController = PetrolPumpController.GetInstance();
-            PayStationController payStationConroller = PayStationController.GetInstance();
+            while(true)
+            {
+                PetrolPumpController pumpController = PetrolPumpController.GetInstance();
+                PayStationController payStationConroller = PayStationController.GetInstance();
 
+                Console.Write("Select a PetrolPump or create one with 'create'\nThe Pumps: {");
+                foreach (int id in pumpController.GetListOfPumpIds())
+                {
+                    Console.Write(String.Format("{0} ", id));
+                }
+                Console.Write(" }\n");
+                string input = Console.ReadLine();
+                if (input.ToLower().Contains("create"))
+                {
+                    // the pump add calls
+                    new PetrolPump();
+                    Console.Write("Created one PetrolPump\n");
+
+                }
+                else
+                {
+
+                }
+            }
         }
     }
 }

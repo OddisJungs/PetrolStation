@@ -51,6 +51,7 @@
     <Compile Include="PetrolPump.cs" />
     <Compile Include="PetrolPumpController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quittance.cs" />
     <Compile Include="Tap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
