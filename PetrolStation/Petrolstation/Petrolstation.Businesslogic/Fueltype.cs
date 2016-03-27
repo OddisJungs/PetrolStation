@@ -6,16 +6,37 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
-    public class Fueltype
+    public class FuelType
     {
         // Private attributes
-        private string name; //Name of the Fueltype object
+        private string name;
         private int pricePerLiter;
 
         // Constructor
-        public Fueltype(string pname, int ppricePerLiter)
+        public FuelType(string pname, int ppricePerLiter)
         {
             name = pname;
+            pricePerLiter = ppricePerLiter;
+        }
+
+        //Get- / Set-Methods
+        public string GetName()
+        {
+            return name;
+        }
+
+        public void SetName(string pname)
+        {
+            name = pname;
+        }
+
+        public int GetPricePerLiter()
+        {
+            return pricePerLiter;
+        }
+
+        public void SetPricePerLiter(int ppricePerLiter)
+        {
             pricePerLiter = ppricePerLiter;
         }
     }

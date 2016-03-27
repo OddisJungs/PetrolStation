@@ -11,11 +11,11 @@ namespace Petrolstation.Businesslogic
         // Private attributes
         private int maxLevel;
         private int fuelLevel;
-        private decimal lowCriticalVolumePercent;
-        private decimal highCriticalVolumePercent;
-        private Fueltype fuelType;
+        private int lowCriticalVolumePercent;
+        private int highCriticalVolumePercent;
+        private FuelType fuelType;
 
-        public FuelTank(int pmaxLevel, decimal plowCriticalVolumePercent, decimal phighCriticalVolumePercent, Fueltype pfuelType)
+        public FuelTank(int pmaxLevel, int plowCriticalVolumePercent, int phighCriticalVolumePercent, FuelType pfuelType)
         {
             maxLevel = pmaxLevel;
             fuelLevel = 0;
@@ -25,10 +25,54 @@ namespace Petrolstation.Businesslogic
         }
 
 
-        public void DecreaseFuelLevel(int pamount)
+        public int CalcFuelLevel(int pamount)
         {
-            fuelLevel = fuelLevel - pamount;
+            return fuelLevel + pamount;
         }
 
+        public int GetMaxLevel()
+        {
+            return maxLevel;
+        }
+
+        public void SetMaxLevel(int pmaxLevel)
+        {
+            maxLevel = pmaxLevel;
+        }
+
+        public int GetFuelLevel()
+        {
+            return fuelLevel;
+        }
+
+        public void SetFuelLevel(int pamount)
+        {
+            fuelLevel = CalcFuelLevel(pamount);
+        }
+
+        public int GetLowCriticalVolumePercent()
+        {
+            return lowCriticalVolumePercent;
+        }
+
+        public void SetLowCriticalVolumePercent(int plowCriticalVolumePercent)
+        {
+            lowCriticalVolumePercent = plowCriticalVolumePercent;
+        }
+
+        public int GetHighCriticalVolumePercent()
+        {
+            return highCriticalVolumePercent;
+        }
+
+        public void SetHighCriticalVolumePercent(int phighCriticalVolumePercent)
+        {
+            highCriticalVolumePercent = phighCriticalVolumePercent;
+        }
+
+        public FuelType GetFuelType()
+        {
+            return fuelType;
+        }
     }
 }
