@@ -10,7 +10,7 @@ namespace Petrolstation.Businesslogic
     public class Tap
     {
         // private members
-        private Delegate fuellingMethod;
+        private Func<Tap, String> fuellingMethod;
         private FuelTank fuelTank;
         private bool locked;
 
@@ -19,7 +19,7 @@ namespace Petrolstation.Businesslogic
         /// Constructs a Tap object
         /// </summary>
         /// <param name="pfuellingMethod">The Fuelling-Method of his PetrolPump</param>
-        public Tap(Delegate pfuellingMethod, FuelTank pfueltank)
+        public Tap(Func<Tap, String> pfuellingMethod, FuelTank pfueltank)
         {
             locked = false;
             fuellingMethod = pfuellingMethod;

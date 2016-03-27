@@ -11,39 +11,32 @@ namespace Petrolstation.UserInterface
     {
         static void Main(string[] args)
         {
-            PetrolPumpController pumpController = PetrolPumpController.GetInstance();
-            PayStationController payStationConroller = PayStationController.GetInstance();
-
             while (true)
             {
-                SelectOrCreatePump();
+                Console.WriteLine("Welcome to the main menu of the petrol station");
+                Console.WriteLine("Press 1: Enter the Petrol Station Simulation software");
+                Console.WriteLine("Press 2: To add Petrol Station Parts to the Simulation software");
+                string input = Console.ReadLine();
+                int selection;
+                bool conversionSuccessful = Int32.TryParse(input, out selection);
+                if (conversionSuccessful)
+                {
+                    switch (selection)
+                    {
+                        case 1:
+                            Console.WriteLine("Do Something");
+                            break;
+                        case 2:
+                            OptionMenu.Show();
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
 
-        static private void SelectOrCreatePump()
-        {
-            Console.Write("Select a PetrolPump or create one with 'create'\nThe Pumps: {");
-            foreach (int id in PetrolPumpController.GetInstance().GetListOfPumpIds())
-            {
-                Console.Write(String.Format("{0} ", id));
-            }
-
-            Console.Write(" }\n");
-            string input = Console.ReadLine();
-            if (input.ToLower().Contains("create"))
-            {
-                // the pump add calls
-                new PetrolPump();
-                Console.Write("Created one PetrolPump\n");
-            }
-            else
-            {
-                int pumpId;
-                Int32.TryParse(input, out pumpId);
-                
-
-            }
-        }
+        
         static private void SelectTap()
         {
 
