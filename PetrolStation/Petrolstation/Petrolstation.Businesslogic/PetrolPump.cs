@@ -72,6 +72,9 @@ namespace Petrolstation.Businesslogic
             }
         }
 
+        /// <summary>
+        /// Reset the Amount to Pay after paying.
+        /// </summary>
         public void ResetAmountToPay()
         {
             amountToPay = 0;
