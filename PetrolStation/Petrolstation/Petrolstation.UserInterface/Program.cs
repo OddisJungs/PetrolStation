@@ -40,7 +40,13 @@ namespace Petrolstation.UserInterface
             {
                 int pumpId;
                 Int32.TryParse(input, out pumpId);
+                
+
             }
+        }
+        static private void SelectTap()
+        {
+
         }
     }
 }

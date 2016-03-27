@@ -47,16 +47,9 @@ namespace Petrolstation.Businesslogic
             return pumpIds;
         }
 
-        public void ResetAndUnlockPump(int ppumpId)
+        public PetrolPump GetPump(int ppumpId)
         {
-            PetrolPump pump = petrolPumps.Where(x => x.GetId() == ppumpId).FirstOrDefault();
-            pump.ResetAmountToPay();
-            pump.UnlockTaps();
-        }
-
-        public int GetAmountToPay(int ppumpId)
-        {
-            return petrolPumps.Where(x => x.GetId() == ppumpId).First().GetAmountToPay();
+            return petrolPumps.Where(x => x.GetId() == ppumpId).FirstOrDefault();
         }
 
         public void AddPump(PetrolPump ppetrolPump)
