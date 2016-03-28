@@ -46,6 +46,11 @@ namespace Petrolstation.Businesslogic
             return petrolPumpId;
         }
 
+        public List<Tap> GetTaps()
+        {
+            return taps;
+        }
+
         public String Fuelling(Tap ptap)
         {
             foreach(Tap oneTap in taps)

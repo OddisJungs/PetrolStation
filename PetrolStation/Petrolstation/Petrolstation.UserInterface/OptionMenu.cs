@@ -59,7 +59,6 @@ namespace Petrolstation.UserInterface
                 int pumpId;
                 Int32.TryParse(input, out pumpId);
                 PetrolPump pump = PetrolPumpController.GetInstance().GetPump(pumpId);
-                // Not Finished ----------------------------------------------------------
                 ModifyOrCreateTap(pumpId);
             }
         }
@@ -67,6 +66,11 @@ namespace Petrolstation.UserInterface
         static internal void ModifyOrCreateTap(int ppumpId)
         {
             Console.Write("Current Selected PumpId: " + ppumpId);
+            PetrolPump petrolpump = PetrolPumpController.GetInstance().GetPump(ppumpId);
+            foreach (Tap tap in petrolpump.GetTaps())
+            {
+                Console.WriteLine("");
+            }
 
             ModifyOrCreatePump();
         }

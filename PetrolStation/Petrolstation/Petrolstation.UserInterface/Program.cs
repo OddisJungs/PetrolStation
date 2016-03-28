@@ -35,11 +35,5 @@ namespace Petrolstation.UserInterface
                 }
             }
         }
-
-        
-        static private void SelectTap()
-        {
-
-        }
     }
 }
