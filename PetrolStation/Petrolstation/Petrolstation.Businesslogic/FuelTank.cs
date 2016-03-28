@@ -29,8 +29,7 @@ namespace Petrolstation.Businesslogic
         public void DecreaseFuelLevel(int pamount)
         {
             fuelLevel = fuelLevel - pamount;
-            fuelLevelPercent = 100 / maxLevel * fuelLevel;
-            CheckIfCritical(fuelLevel);
+            CheckIfCritical();
         }
 
         public int GetPricePerLiter()
@@ -48,8 +47,9 @@ namespace Petrolstation.Businesslogic
             return IsCritical;
         }
 
-        private void CheckIfCritical(int pfuelLevel)
+        private void CheckIfCritical()
         {
+            decimal fuelLevelPercent = 100 / maxLevel * fuelLevel;
             if (fuelLevelPercent <= lowCriticalVolumePercent)
             {
                 IsCritical = true;

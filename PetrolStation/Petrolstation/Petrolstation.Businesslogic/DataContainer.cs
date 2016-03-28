@@ -41,7 +41,5 @@ namespace Petrolstation.Businesslogic
             catch { }
             return list;
         }
-
-
     }
 }
