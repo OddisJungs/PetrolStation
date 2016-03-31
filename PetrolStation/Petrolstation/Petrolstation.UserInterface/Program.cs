@@ -24,7 +24,7 @@ namespace Petrolstation.UserInterface
                     switch (selection)
                     {
                         case 1:
-                            Console.WriteLine("Do Something");
+                            PetrolstationSimulation.Show();
                             break;
                         case 2:
                             OptionMenu.Show();
