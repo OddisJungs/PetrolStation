@@ -53,6 +53,7 @@ namespace Petrolstation.UserInterface
                 // the pump add calls
                 new PetrolPump();
                 Console.Write("Created one PetrolPump\n");
+                Show();
             }
             else
             {
@@ -65,14 +66,26 @@ namespace Petrolstation.UserInterface
 
         static internal void ModifyOrCreateTap(int ppumpId)
         {
-            Console.Write("Current Selected PumpId: " + ppumpId);
+            Console.WriteLine("Current Selected PumpId: " + ppumpId);
+            Console.Write("Select a Tap or create one with 'create'\nThe Taps: {");
             PetrolPump petrolpump = PetrolPumpController.GetInstance().GetPump(ppumpId);
-            foreach (Tap tap in petrolpump.GetTaps())
+            foreach (int id in petrolpump.GetListOfTapsId())
             {
-                Console.WriteLine("");
+                Console.WriteLine(String.Format("{0} ", id));
             }
 
-            ModifyOrCreatePump();
+            Console.WriteLine(" }");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("create"))
+            {
+                // the pump add calls
+                //new Tap(petrolpump.Fuelling, );
+                // MUST ADD AN FuelTankList FIRST!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Console.Write("Created one Tap\n");
+                Show();
+            }
+
+
         }
     }
 }

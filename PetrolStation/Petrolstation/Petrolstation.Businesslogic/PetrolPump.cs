@@ -33,7 +33,8 @@ namespace Petrolstation.Businesslogic
 
         public void AddTap(FuelTank pfuelTank)
         {
-            taps.Add(new Tap(this.Fuelling, pfuelTank));
+            int id = taps.Count() + 1;
+            taps.Add(new Tap(this.Fuelling, pfuelTank, id));
         }
        
         public void SetId(int ppumpId)
@@ -46,9 +47,14 @@ namespace Petrolstation.Businesslogic
             return petrolPumpId;
         }
 
-        public List<Tap> GetTaps()
+        public List<int> GetListOfTapsId()
         {
-            return taps;
+            List<int> tapIds = new List<int>();
+            foreach (Tap tap in taps)
+            {
+                tapIds.Add(tap.GetId());
+            }
+            return tapIds;
         }
 
         public String Fuelling(Tap ptap)

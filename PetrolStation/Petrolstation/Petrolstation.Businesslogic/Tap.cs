@@ -13,17 +13,19 @@ namespace Petrolstation.Businesslogic
         private Func<Tap, String> fuellingMethod;
         private FuelTank fuelTank;
         private bool locked;
+        private int id;
 
         // Constructor
         /// <summary>
         /// Constructs a Tap object
         /// </summary>
         /// <param name="pfuellingMethod">The Fuelling-Method of his PetrolPump</param>
-        public Tap(Func<Tap, String> pfuellingMethod, FuelTank pfueltank)
+        public Tap(Func<Tap, String> pfuellingMethod, FuelTank pfueltank, int pid)
         {
             locked = false;
             fuellingMethod = pfuellingMethod;
             fuelTank = pfueltank;
+            id = pid;
         }
 
         // public Methods
@@ -55,6 +57,11 @@ namespace Petrolstation.Businesslogic
         public string GetFuelTypeName()
         {
             return fuelTank.GetFuelTypeName();
+        }
+
+        public int GetId()
+        {
+            return id;
         }
     }
 }
