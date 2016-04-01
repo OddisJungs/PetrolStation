@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace Petrolstation.Businesslogic
 {
     [Serializable]
-    public class PetrolPump : DataItem
+    public class PetrolPump : PetrolStationObjectInstance
     {
         // private members
         private const int tankSpeed = 50; // How Many ml per second are tanked
-        private int petrolPumpId;
         private int amountToPay;
         private List<Tap> taps;
 
@@ -19,8 +18,6 @@ namespace Petrolstation.Businesslogic
         public PetrolPump() : base()
         {
             // Add himself to the PetrolPumpController
-            petrolPumpId = 0;
-            PetrolPumpInstanceController.GetInstance().AddPump(this);
             taps = new List<Tap>();
             Save();
         }
@@ -35,16 +32,6 @@ namespace Petrolstation.Businesslogic
         {
             int id = taps.Count() + 1;
             taps.Add(new Tap(this.Fuelling, pfuelTank, id));
-        }
-       
-        public void SetId(int ppumpId)
-        {
-            petrolPumpId = ppumpId;
-        }
-
-        public int GetId()
-        {
-            return petrolPumpId;
         }
 
         public List<int> GetListOfTapsId()
