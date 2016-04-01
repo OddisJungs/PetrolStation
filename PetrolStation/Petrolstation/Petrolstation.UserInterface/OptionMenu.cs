@@ -41,7 +41,7 @@ namespace Petrolstation.UserInterface
         static internal void ModifyOrCreatePump()
         {
             Console.Write("Select a PetrolPump or create one with 'create'\nThe Pumps: {");
-            foreach (int id in PetrolStationInstanceController.GetInstance().GetListOfPumpIds())
+            foreach (int id in PetrolStationObjectController.GetInstance().GetListOfPumpIds())
             {
                 Console.Write(String.Format("{0} ", id));
             }
@@ -59,7 +59,7 @@ namespace Petrolstation.UserInterface
             {
                 int pumpId;
                 Int32.TryParse(input, out pumpId);
-                PetrolPump pump = PetrolStationInstanceController.GetInstance().GetObjectInstance<PetrolPump>(pumpId);
+                PetrolPump pump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(pumpId);
                 ModifyOrCreateTap(pumpId);
             }
         }
@@ -68,7 +68,7 @@ namespace Petrolstation.UserInterface
         {
             Console.WriteLine("Current Selected PumpId: " + ppumpId);
             Console.Write("Select a Tap or create one with 'create'\nThe Taps: {");
-            PetrolPump petrolpump = PetrolStationInstanceController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
+            PetrolPump petrolpump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
             foreach (int id in petrolpump.GetListOfTapsId())
             {
                 Console.WriteLine(String.Format("{0} ", id));

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
-    public class PetrolStationInstanceController
+    public class PetrolStationObjectController
     {
         // private members
-        private static PetrolStationInstanceController instance;
+        private static PetrolStationObjectController @object;
 
         private List<PetrolStationObject> petrolStationObjectInstances;
 
         // Private Konstruktor
-        private PetrolStationInstanceController()
+        private PetrolStationObjectController()
         {
             DataContainer datacontainer = new DataContainer();
             petrolStationObjectInstances = new List<PetrolStationObject>();
@@ -28,13 +28,13 @@ namespace Petrolstation.Businesslogic
         }
 
         // public methods
-        public static PetrolStationInstanceController GetInstance()
+        public static PetrolStationObjectController GetInstance()
         {
-            if (instance == null)
+            if (@object == null)
             {
-                instance = new PetrolStationInstanceController();
+                @object = new PetrolStationObjectController();
             }
-            return instance;
+            return @object;
         }
 
         public List<int> GetListOfPumpIds()

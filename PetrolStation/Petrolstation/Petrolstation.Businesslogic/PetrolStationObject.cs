@@ -16,8 +16,7 @@ namespace Petrolstation.Businesslogic
         public PetrolStationObject()
             : base()
         {
-            // Add himself to the PetrolPumpController
-            PetrolStationInstanceController.GetInstance().AddInstance(this);
+            PetrolStationObjectController.GetInstance().AddInstance(this);
         }
 
         // public methods Item

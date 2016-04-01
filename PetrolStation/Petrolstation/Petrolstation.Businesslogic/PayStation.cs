@@ -32,8 +32,6 @@ namespace Petrolstation.Businesslogic
             moneyContainers.Add(new MoneyContainer(20000, 500, 15.5, 88.5));
             moneyContainers.Add(new MoneyContainer(100000, 500, 15.5, 88.5));
             moneyContainers = moneyContainers.OrderByDescending(x => x.GetWorth()).ToList();
-
-            PetrolStationInstanceController.GetInstance().AddInstance(this);
         }
 
         /// <summary>
@@ -42,7 +40,7 @@ namespace Petrolstation.Businesslogic
         /// <param name="ppumpId"></param>
         public void SetAmountToPay(int ppumpId)
         {
-            amountToPay = PetrolStationInstanceController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId).GetAmountToPay();
+            amountToPay = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId).GetAmountToPay();
         }
 
         /// <summary>
@@ -65,7 +63,7 @@ namespace Petrolstation.Businesslogic
                 returnMoney = amountToPay * -1;
                 amountToPay = 0;
 
-                PetrolStationInstanceController.GetInstance().GetObjectInstance<PetrolPump>(currentSelectedPumpId).UnlockTaps();
+                PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(currentSelectedPumpId).UnlockTaps();
                 CreateQuittance();
                 ReturnBackMoney();
             }

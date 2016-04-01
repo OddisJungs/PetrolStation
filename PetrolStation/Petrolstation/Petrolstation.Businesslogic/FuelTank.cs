@@ -24,7 +24,6 @@ namespace Petrolstation.Businesslogic
             fuelLevel = 0;
             lowCriticalVolumePercent = plowCriticalVolumePercent;
             fuelType = pfuelType;
-            PetrolStationInstanceController.GetInstance().AddInstance(this);
         }
 
         /// <summary>
