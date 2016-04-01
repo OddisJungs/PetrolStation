@@ -18,6 +18,7 @@ namespace Petrolstation.Businesslogic
         private PetrolStationInstanceController()
         {
             DataContainer datacontainer = new DataContainer();
+            petrolStationObjectInstances = new List<PetrolStationObjectInstance>();
             petrolStationObjectInstances.AddRange(datacontainer.Load<PetrolPump>());
 
             //foreach(PetrolPump pump in loadedPumps)
