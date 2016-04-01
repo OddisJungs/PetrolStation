@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
-    public class PetrolPumpController
+    public class PetrolPumpInstanceController
     {
         // private members
-        private static PetrolPumpController instance;
+        private static PetrolPumpInstanceController instance;
 
         private List<PetrolPump> petrolPumps;
 
         // Private Konstruktor
-        private PetrolPumpController()
+        private PetrolPumpInstanceController()
         {
             petrolPumps = new List<PetrolPump>();
             DataContainer datacontainer = new DataContainer();
@@ -27,11 +27,11 @@ namespace Petrolstation.Businesslogic
         }
 
         // public methods
-        public static PetrolPumpController GetInstance()
+        public static PetrolPumpInstanceController GetInstance()
         {
             if (instance == null)
             {
-                instance = new PetrolPumpController();
+                instance = new PetrolPumpInstanceController();
             }
             return instance;
         }

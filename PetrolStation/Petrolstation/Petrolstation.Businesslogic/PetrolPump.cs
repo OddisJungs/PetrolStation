@@ -20,7 +20,7 @@ namespace Petrolstation.Businesslogic
         {
             // Add himself to the PetrolPumpController
             petrolPumpId = 0;
-            PetrolPumpController.GetInstance().AddPump(this);
+            PetrolPumpInstanceController.GetInstance().AddPump(this);
             taps = new List<Tap>();
             Save();
         }
