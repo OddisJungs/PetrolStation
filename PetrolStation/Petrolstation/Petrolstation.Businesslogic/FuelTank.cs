@@ -15,9 +15,10 @@ namespace Petrolstation.Businesslogic
         private int fuelLevel;
         private decimal lowCriticalVolumePercent;
         private Fueltype fuelType;
-        private bool IsCritical = false;
+        private bool isCritical = false;
         private decimal fuelLevelPercent;
 
+        // Constructor
         public FuelTank(int pmaxLevel, decimal plowCriticalVolumePercent, Fueltype pfuelType)
         {
             maxLevel = pmaxLevel;
@@ -26,33 +27,52 @@ namespace Petrolstation.Businesslogic
             fuelType = pfuelType;
         }
 
+        /// <summary>
+        /// Decrease the actual value of 'fuelLevel'.
+        /// </summary>
+        /// <param name="pamount"></param>
         public void DecreaseFuelLevel(int pamount)
         {
             fuelLevel = fuelLevel - pamount;
             CheckIfCritical();
         }
 
+        /// <summary>
+        /// Get the value the Method 'GetPricePerLiter' from the 'fuelType'.
+        /// </summary>
+        /// <returns></returns>
         public int GetPricePerLiter()
         {
             return fuelType.GetPricePerLiter();
         }
 
+        /// <summary>
+        /// Get the value the Method 'GetFuelTypeName' from the 'fuelType'.
+        /// </summary>
+        /// <returns></returns>
         public string GetFuelTypeName()
         {
             return fuelType.GetName();
         }
 
+        /// <summary>
+        /// Get the value of 'IsCritical'.
+        /// </summary>
+        /// <returns></returns>
         public bool GetIsCritical()
         {
-            return IsCritical;
+            return isCritical;
         }
 
+        /// <summary>
+        /// Check if the fuelLevel critical or not.
+        /// </summary>
         private void CheckIfCritical()
         {
             decimal fuelLevelPercent = 100 / maxLevel * fuelLevel;
             if (fuelLevelPercent <= lowCriticalVolumePercent)
             {
-                IsCritical = true;
+                isCritical = true;
             }
         }
     }

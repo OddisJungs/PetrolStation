@@ -14,6 +14,8 @@ namespace Petrolstation.Businesslogic
         // private members
         private string savepath;
         private string guid; // id to find the right file in the db
+
+        // Constructor
         public DataItem()
         {
             savepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "\\PetrolStations\\Saves\\", GetType().Name);
@@ -24,6 +26,10 @@ namespace Petrolstation.Businesslogic
         }
 
         // public methods
+
+        /// <summary>
+        /// Save the data into a binary file.
+        /// </summary>
         public void Save()
         {
             string savefile = null;

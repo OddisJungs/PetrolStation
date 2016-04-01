@@ -19,11 +19,19 @@ namespace Petrolstation.Businesslogic
             pricePerLiter = ppricePerLiter;
         }
 
+        /// <summary>
+        /// Get the value of 'pricePerLiter'.
+        /// </summary>
+        /// <returns></returns>
         public int GetPricePerLiter()
         {
             return pricePerLiter;
         }
 
+        /// <summary>
+        /// Get the value of 'name'.
+        /// </summary>
+        /// <returns></returns>
         public string GetName()
         {
             return name;

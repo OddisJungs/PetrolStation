@@ -25,6 +25,11 @@ namespace Petrolstation.Businesslogic
             Save();
         }
 
+        /// <summary>
+        /// Load the quittances of the setted time duration.
+        /// </summary>
+        /// <param name="pdate"></param>
+        /// <returns></returns>
         public List<Quittance> Load(DateTime pdate)
         {
             List<Quittance> list = new List<Quittance>();
