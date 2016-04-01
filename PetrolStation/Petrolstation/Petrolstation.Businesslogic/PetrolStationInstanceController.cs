@@ -49,8 +49,7 @@ namespace Petrolstation.Businesslogic
 
         public T GetObjectInstance<T>(int pid)
         {
-            T objectInstance = (T)Convert.ChangeType(petrolStationObjectInstances.FirstOrDefault(x => x.GetId() == pid && x.GetType() == typeof(T)), typeof(T));
-            return objectInstance;
+            return (T)Convert.ChangeType(petrolStationObjectInstances.FirstOrDefault(x => x.GetId() == pid && x.GetType() == typeof(T)), typeof(T));
         }
 
         public void AddInstance(PetrolStationObjectInstance ppetrolStationObjectInstance)
