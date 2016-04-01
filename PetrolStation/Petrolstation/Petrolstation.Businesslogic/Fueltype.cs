@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
+    [Serializable]
     public class Fueltype
     {
         // Private attributes
         private string name; //Name of the Fueltype object
-        private int pricePerLiter;
+        private int pricePerLiter; // In Rp.
 
         // Constructor
         public Fueltype(string pname, int ppricePerLiter)

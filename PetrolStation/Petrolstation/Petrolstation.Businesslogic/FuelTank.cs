@@ -11,16 +11,16 @@ namespace Petrolstation.Businesslogic
     public class FuelTank : PetrolStationObject
     {
         // Private attributes
-        private int maxLevel;
+        private int maxLevel; // Volume of tank in ml
         private int fuelLevel;
         private decimal lowCriticalVolumePercent;
         private Fueltype fuelType;
         private bool isCritical = false;
 
         // Constructor
-        public FuelTank(int pmaxLevel, decimal plowCriticalVolumePercent, Fueltype pfuelType)
+        public FuelTank(int ptankVolume, decimal plowCriticalVolumePercent, Fueltype pfuelType)
         {
-            maxLevel = pmaxLevel;
+            maxLevel = ptankVolume;
             fuelLevel = 0;
             lowCriticalVolumePercent = plowCriticalVolumePercent;
             fuelType = pfuelType;

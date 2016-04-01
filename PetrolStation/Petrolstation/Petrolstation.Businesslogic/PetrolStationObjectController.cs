@@ -10,7 +10,7 @@ namespace Petrolstation.Businesslogic
     public class PetrolStationObjectController
     {
         // private members
-        private static PetrolStationObjectController @object;
+        private static PetrolStationObjectController instance = new PetrolStationObjectController();
 
         private List<PetrolStationObject> petrolStationObjectInstances;
 
@@ -30,11 +30,7 @@ namespace Petrolstation.Businesslogic
         // public methods
         public static PetrolStationObjectController GetInstance()
         {
-            if (@object == null)
-            {
-                @object = new PetrolStationObjectController();
-            }
-            return @object;
+            return instance;
         }
 
         public List<int> GetInstanceIds<T>()

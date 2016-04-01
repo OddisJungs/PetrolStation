@@ -14,7 +14,7 @@ namespace Petrolstation.UserInterface
             Console.WriteLine("Welcome To the Option Menu");
             Console.WriteLine("Press 1: Modify or Create PetrolPump");
             Console.WriteLine("Press 2: List PayStation");
-            Console.WriteLine("Press 3 to create an Fueltank");
+            Console.WriteLine("Press 3: List or create an Fueltank");
             string input = Console.ReadLine();
             int selection;
             bool parsingSuccessful = Int32.TryParse(input, out selection);
@@ -28,6 +28,9 @@ namespace Petrolstation.UserInterface
                     case 2:
                         ListPayStation();
                         break;
+                    case 3:
+                        ListOrCreateFueltank();
+                       break;
                     default:
                         break;
                 }
@@ -106,6 +109,32 @@ namespace Petrolstation.UserInterface
                 Console.Write("Created one Tap\n");
                 Show();
             }
+        }
+
+        private static void ListOrCreateFueltank()
+        {
+            Console.WriteLine("Create new Fueltank with 'create'");
+            Console.Write("Current Fueltanks: { ");
+            foreach (int id in PetrolStationObjectController.GetInstance().GetInstanceIds<FuelTank>())
+            {
+                Console.Write(String.Format("{0} ", id));
+            }
+            Console.Write("}\n");
+            string input = Console.ReadLine();
+
+            if (input.ToLower().Contains("create"))
+            {
+                Console.Write("The tank Volume in ml:  ");
+                int tankVolume = Int32.Parse(Console.ReadLine());
+                Console.Write("Critical tank fuelstate in percent:  ");
+                decimal criticalLevel = Decimal.Parse(Console.ReadLine());
+                Console.Write("The Fueltypename:  ");
+                string fueltypename = Console.ReadLine();
+                Console.Write("The PricePerLiter (In Rp.):  ");
+                int priceperliter = Int32.Parse(Console.ReadLine());
+                new FuelTank(tankVolume, criticalLevel, new Fueltype(fueltypename, priceperliter));
+                Console.WriteLine("Fueltank created!");
+            }            
         }
     }
 }
