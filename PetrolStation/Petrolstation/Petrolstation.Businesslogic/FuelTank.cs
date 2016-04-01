@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Petrolstation.Businesslogic
 {
     [Serializable]
-    public class FuelTank
+    public class FuelTank : PetrolStationObjectInstance
     {
         // Private attributes
         private int maxLevel;
@@ -16,7 +16,6 @@ namespace Petrolstation.Businesslogic
         private decimal lowCriticalVolumePercent;
         private Fueltype fuelType;
         private bool isCritical = false;
-        private decimal fuelLevelPercent;
 
         // Constructor
         public FuelTank(int pmaxLevel, decimal plowCriticalVolumePercent, Fueltype pfuelType)
@@ -25,6 +24,7 @@ namespace Petrolstation.Businesslogic
             fuelLevel = 0;
             lowCriticalVolumePercent = plowCriticalVolumePercent;
             fuelType = pfuelType;
+            PetrolStationInstanceController.GetInstance().AddInstance(this);
         }
 
         /// <summary>

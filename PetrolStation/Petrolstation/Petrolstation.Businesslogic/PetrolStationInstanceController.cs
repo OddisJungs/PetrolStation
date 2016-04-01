@@ -19,12 +19,8 @@ namespace Petrolstation.Businesslogic
         {
             DataContainer datacontainer = new DataContainer();
             petrolStationObjectInstances = new List<PetrolStationObjectInstance>();
+            // Load Pumps
             petrolStationObjectInstances.AddRange(datacontainer.Load<PetrolPump>());
-
-            //foreach(PetrolPump pump in loadedPumps)
-            //{
-            //    AddPump(pump);
-            //}
         }
 
         // public methods
@@ -40,7 +36,7 @@ namespace Petrolstation.Businesslogic
         public List<int> GetListOfPumpIds()
         {
             List<int> pumpIds = new List<int>();
-            foreach(PetrolPump pump in petrolStationObjectInstances.Where(x => x.GetType() == typeof(PetrolPump)))
+            foreach(PetrolStationObjectInstance pump in petrolStationObjectInstances.Where(x => x.GetType() == typeof(PetrolPump)))
             {
                 pumpIds.Add(pump.GetId());
             }
