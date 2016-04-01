@@ -50,5 +50,14 @@ namespace Petrolstation.Businesslogic
                 binaryFormatter.Serialize(fileStream, this);
             }
         }
+
+        /// <summary>
+        /// Return the value of 'savepath';
+        /// </summary>
+        /// <returns></returns>
+        protected string GetSavePath()
+        {
+            return savepath;
+        }
     }
 }
