@@ -37,14 +37,14 @@ namespace Petrolstation.Businesslogic
             return @object;
         }
 
-        public List<int> GetListOfPumpIds()
+        public List<int> GetInstanceIds<T>()
         {
-            List<int> pumpIds = new List<int>();
-            foreach(PetrolPump pump in petrolStationObjectInstances.Where(x => x.GetType() == typeof(PetrolPump)))
+            List<int> ids = new List<int>();
+            foreach(PetrolStationObject petrolStationObject in petrolStationObjectInstances.Where(x => x.GetType() == typeof(T)))
             {
-                pumpIds.Add(pump.GetId());
+                ids.Add(petrolStationObject.GetId());
             }
-            return pumpIds.OrderBy(x => x).ToList();
+            return ids.OrderBy(x => x).ToList();
         }
 
         public T GetObjectInstance<T>(int pid)

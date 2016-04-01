@@ -13,7 +13,7 @@ namespace Petrolstation.UserInterface
         {
             Console.WriteLine("Welcome To the Option Menu");
             Console.WriteLine("Press 1: Modify or Create PetrolPump");
-            Console.WriteLine("Press 2: Create PayStation");
+            Console.WriteLine("Press 2: List PayStation");
             Console.WriteLine("Press 3 to create an Fueltank");
             string input = Console.ReadLine();
             int selection;
@@ -26,8 +26,7 @@ namespace Petrolstation.UserInterface
                         ModifyOrCreatePump();
                         break;
                     case 2:
-                        new PayStation();
-                        Console.WriteLine("Paystation created");
+                        ListPayStation();
                         break;
                     default:
                         break;
@@ -43,7 +42,7 @@ namespace Petrolstation.UserInterface
         static internal void ModifyOrCreatePump()
         {
             Console.Write("Select a PetrolPump or create one with 'create'\nThe Pumps: {");
-            foreach (int id in PetrolStationObjectController.GetInstance().GetListOfPumpIds())
+            foreach (int id in PetrolStationObjectController.GetInstance().GetInstanceIds<PetrolPump>())
             {
                 Console.Write(String.Format("{0} ", id));
             }
@@ -65,6 +64,27 @@ namespace Petrolstation.UserInterface
                 ModifyOrCreateTap(pumpId);
             }
         }
+
+        static internal void ListPayStation()
+        {
+            Console.Write("Create a new Paystation with 'create'");
+            Console.Write("Current Paystations: {");
+            foreach (int id in PetrolStationObjectController.GetInstance().GetInstanceIds<PayStation>())
+            {
+                Console.Write(String.Format("{0} ", id));
+            }
+            Console.Write("}\n");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("create"))
+            {
+                new PayStation();
+            }
+            else
+            {
+                Show();
+            }
+        }
+
 
         static internal void ModifyOrCreateTap(int ppumpId)
         {

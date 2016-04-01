@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
+    [Serializable]
     public class PayStation : PetrolStationObject
     {
         // private Members
