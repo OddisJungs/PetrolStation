@@ -31,22 +31,36 @@ namespace Petrolstation.Businesslogic
             taps.Add(ptap);
         }
 
+        // Set a the id for the actual object.
+        // Add a new tap to the petrolpump.
         public void AddTap(FuelTank pfuelTank)
         {
             int id = taps.Count() + 1;
             taps.Add(new Tap(this.Fuelling, pfuelTank, id));
         }
        
+        /// <summary>
+        /// Set the value of 'petrolPumpId' to the parameter value.
+        /// </summary>
+        /// <param name="ppumpId"></param>
         public void SetId(int ppumpId)
         {
             petrolPumpId = ppumpId;
         }
 
+        /// <summary>
+        /// Get the value of 'petrolPumpId'.
+        /// </summary>
+        /// <returns></returns>
         public int GetId()
         {
             return petrolPumpId;
         }
 
+        /// <summary>
+        /// Return the Id's of all objects in the list 'taps'.
+        /// </summary>
+        /// <returns></returns>
         public List<int> GetListOfTapsId()
         {
             List<int> tapIds = new List<int>();
@@ -57,6 +71,11 @@ namespace Petrolstation.Businesslogic
             return tapIds;
         }
 
+        /// <summary>
+        /// Start the fuelling process.
+        /// </summary>
+        /// <param name="ptap"></param>
+        /// <returns></returns>
         public String Fuelling(Tap ptap)
         {
             foreach(Tap oneTap in taps)
@@ -79,11 +98,18 @@ namespace Petrolstation.Businesslogic
             return "";
         }
 
+        /// <summary>
+        /// Get the value of 'amountToPay'.
+        /// </summary>
+        /// <returns></returns>
         public int GetAmountToPay()
         {
             return amountToPay;
         }
 
+        /// <summary>
+        /// Unlock all tap objects in the list 'taps'.
+        /// </summary>
         public void UnlockTaps()
         {
             foreach (Tap tap in taps)

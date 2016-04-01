@@ -34,6 +34,10 @@ namespace Petrolstation.Businesslogic
             moneyContainers = moneyContainers.OrderByDescending(x => x.GetWorth()).ToList();
         }
 
+        /// <summary>
+        /// Set 'amountToPay' to the return value of the methode 'GetAmountToPay'.
+        /// </summary>
+        /// <param name="ppumpId"></param>
         public void SetAmountToPay(int ppumpId)
         {
             amountToPay = PetrolPumpController.GetInstance().GetPump(ppumpId).GetAmountToPay();
@@ -65,12 +69,18 @@ namespace Petrolstation.Businesslogic
             }
         }
 
+        /// <summary>
+        /// Create a new Quittance of this Fuelling.
+        /// </summary>
         private void CreateQuittance()
         {
             // Do something
             
         }
 
+        /// <summary>
+        /// Give the return money.
+        /// </summary>
         private void ReturnBackMoney()
         {
             while (returnMoney != 0)
