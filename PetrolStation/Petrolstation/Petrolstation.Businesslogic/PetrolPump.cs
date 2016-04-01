@@ -19,7 +19,6 @@ namespace Petrolstation.Businesslogic
         {
             // Add himself to the PetrolPumpController
             taps = new List<Tap>();
-            Save();
         }
 
         // public methods

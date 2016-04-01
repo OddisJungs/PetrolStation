@@ -14,6 +14,7 @@ namespace Petrolstation.UserInterface
             Console.WriteLine("Welcome To the Option Menu");
             Console.WriteLine("Press 1: Modify or Create PetrolPump");
             Console.WriteLine("Press 2: Create PayStation");
+            Console.WriteLine("Press 3 to create an Fueltank");
             string input = Console.ReadLine();
             int selection;
             bool parsingSuccessful = Int32.TryParse(input, out selection);
@@ -25,7 +26,8 @@ namespace Petrolstation.UserInterface
                         ModifyOrCreatePump();
                         break;
                     case 2:
-                        Console.WriteLine("Do Something other");
+                        new PayStation();
+                        Console.WriteLine("Paystation created");
                         break;
                     default:
                         break;
@@ -84,8 +86,6 @@ namespace Petrolstation.UserInterface
                 Console.Write("Created one Tap\n");
                 Show();
             }
-
-
         }
     }
 }

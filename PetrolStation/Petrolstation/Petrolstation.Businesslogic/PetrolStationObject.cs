@@ -17,6 +17,7 @@ namespace Petrolstation.Businesslogic
             : base()
         {
             PetrolStationObjectController.GetInstance().AddInstance(this);
+            Save();
         }
 
         // public methods Item
