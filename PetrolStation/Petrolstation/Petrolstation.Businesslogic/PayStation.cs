@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
-    public class PayStation : DataItem
+    public class PayStation : PetrolStationObject
     {
         // private Members
         private List<MoneyContainer> moneyContainers;
@@ -32,6 +32,8 @@ namespace Petrolstation.Businesslogic
             moneyContainers.Add(new MoneyContainer(20000, 500, 15.5, 88.5));
             moneyContainers.Add(new MoneyContainer(100000, 500, 15.5, 88.5));
             moneyContainers = moneyContainers.OrderByDescending(x => x.GetWorth()).ToList();
+
+            PetrolStationInstanceController.GetInstance().AddInstance(this);
         }
 
         /// <summary>

@@ -21,6 +21,10 @@ namespace Petrolstation.Businesslogic
             petrolStationObjectInstances = new List<PetrolStationObjectInstance>();
             // Load Pumps
             petrolStationObjectInstances.AddRange(datacontainer.Load<PetrolPump>());
+            // Load Fueltanks
+            petrolStationObjectInstances.AddRange(datacontainer.Load<FuelTank>());
+            // PayStation
+            petrolStationObjectInstances.AddRange(datacontainer.Load<PayStation>());
         }
 
         // public methods

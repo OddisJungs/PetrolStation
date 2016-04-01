@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace Petrolstation.Businesslogic
 {
     [Serializable]
-    public class PetrolStationObjectInstance : DataItem
+    public class PetrolStationObject : DataItem
     {
         // Private Members
         private int id;
 
         // Constructor
-        public PetrolStationObjectInstance()
+        public PetrolStationObject()
             : base()
         {
             // Add himself to the PetrolPumpController
