@@ -49,7 +49,7 @@
     <Compile Include="PayStation.cs" />
     <Compile Include="PayStationController.cs" />
     <Compile Include="PetrolPump.cs" />
-    <Compile Include="PetrolPumpController.cs" />
+    <Compile Include="PetrolStationInstanceController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quittance.cs" />
     <Compile Include="Tap.cs" />

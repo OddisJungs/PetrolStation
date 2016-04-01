@@ -28,19 +28,19 @@ namespace Petrolstation.Businesslogic
         public List<Quittance> Load(DateTime pdate)
         {
             List<Quittance> list = new List<Quittance>();
-            string filespath = Path.Combine(path, typeof(Quittance).Name);
-            try
-            {
-                foreach (string file in Directory.GetFiles(filespath))
-                {
-                    using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
-                    {
-                        BinaryFormatter binaryFormatter = new BinaryFormatter();
-                        list.Add((Quittance)binaryFormatter.Deserialize(fileStream));
-                    }
-                }
-            }
-            catch { }
+            //string filespath = Path.Combine(path, typeof(Quittance).Name);
+            //try
+            //{
+            //    foreach (string file in Directory.GetFiles(filespath))
+            //    {
+            //        using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
+            //        {
+            //            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            //            list.Add((Quittance)binaryFormatter.Deserialize(fileStream));
+            //        }
+            //    }
+            //}
+            //catch { }
             return list;
         }
 
