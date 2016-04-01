@@ -12,13 +12,13 @@ namespace Petrolstation.Businesslogic
         // private members
         private static PetrolStationInstanceController instance;
 
-        private List<PetrolStationObjectInstance> petrolStationObjectInstances;
+        private List<PetrolStationObject> petrolStationObjectInstances;
 
         // Private Konstruktor
         private PetrolStationInstanceController()
         {
             DataContainer datacontainer = new DataContainer();
-            petrolStationObjectInstances = new List<PetrolStationObjectInstance>();
+            petrolStationObjectInstances = new List<PetrolStationObject>();
             // Load Pumps
             petrolStationObjectInstances.AddRange(datacontainer.Load<PetrolPump>());
             // Load Fueltanks
@@ -40,7 +40,7 @@ namespace Petrolstation.Businesslogic
         public List<int> GetListOfPumpIds()
         {
             List<int> pumpIds = new List<int>();
-            foreach(PetrolStationObjectInstance pump in petrolStationObjectInstances.Where(x => x.GetType() == typeof(PetrolPump)))
+            foreach(PetrolStationObject pump in petrolStationObjectInstances.Where(x => x.GetType() == typeof(PetrolPump)))
             {
                 pumpIds.Add(pump.GetId());
             }
@@ -53,11 +53,11 @@ namespace Petrolstation.Businesslogic
             return (T)Convert.ChangeType(petrolStationObjectInstances.FirstOrDefault(x => x.GetId() == pid && x.GetType() == typeof(T)), typeof(T));
         }
 
-        public void AddInstance(PetrolStationObjectInstance ppetrolStationObjectInstance)
+        public void AddInstance(PetrolStationObject ppetrolStationObject)
         {
-            int id = petrolStationObjectInstances.Count(x => x.GetType() == ppetrolStationObjectInstance.GetType()) + 1;
-            ppetrolStationObjectInstance.SetId(id);
-            petrolStationObjectInstances.Add(ppetrolStationObjectInstance);
+            int id = petrolStationObjectInstances.Count(x => x.GetType() == ppetrolStationObject.GetType()) + 1;
+            ppetrolStationObject.SetId(id);
+            petrolStationObjectInstances.Add(ppetrolStationObject);
         }
     }
 }

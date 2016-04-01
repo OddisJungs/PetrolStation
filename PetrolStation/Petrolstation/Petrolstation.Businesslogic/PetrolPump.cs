@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Petrolstation.Businesslogic
 {
     [Serializable]
-    public class PetrolPump : PetrolStationObjectInstance
+    public class PetrolPump : PetrolStationObject
     {
         // private members
         private const int tankSpeed = 50; // How Many ml per second are tanked

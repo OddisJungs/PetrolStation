@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Petrolstation.Businesslogic
 {
     [Serializable]
-    public class FuelTank : PetrolStationObjectInstance
+    public class FuelTank : PetrolStationObject
     {
         // Private attributes
         private int maxLevel;
