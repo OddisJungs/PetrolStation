@@ -21,7 +21,7 @@ namespace Petrolstation.Businesslogic
         /// Constructs a Tap object
         /// </summary>
         /// <param name="pfuellingMethod">The Fuelling-Method of his PetrolPump</param>
-        public Tap(Func<Tap, int> pfuellingMethod, FuelTank pfueltank, int pid)
+        public Tap(FuelTank pfueltank, int pid)
         {
             locked = false;
             fuellingMethod = pfuellingMethod;
@@ -30,14 +30,6 @@ namespace Petrolstation.Businesslogic
         }
 
         // public Methods
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Take()
-        {
-            fuellingMethod.DynamicInvoke(this);
-        }
 
         /// <summary>
         /// Set 'locked' to 'true'.

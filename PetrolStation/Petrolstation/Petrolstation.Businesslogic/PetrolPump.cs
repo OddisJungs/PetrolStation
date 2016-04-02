@@ -32,7 +32,7 @@ namespace Petrolstation.Businesslogic
         public void AddTap(FuelTank pfuelTank)
         {
             int id = taps.Count() + 1;
-            taps.Add(new Tap(this.StartFuelling, pfuelTank, id));
+            taps.Add(new Tap(pfuelTank, id));
             Save();
         }
 
@@ -55,20 +55,22 @@ namespace Petrolstation.Businesslogic
         /// </summary>
         /// <param name="ptap"></param>
         /// <returns></returns>
-        public int StartFuelling(Tap ptap)
+        public int StartFuelling(int ptapId)
         {
             foreach(Tap oneTap in taps)
             {
-                if (oneTap != ptap)
+                if (oneTap.GetId() != ptapId)
                 {
                     oneTap.Lock();
                 }
             }
 
-            amountToPay = ptap.GetPricePerLiter();
+            Tap selectedTap = taps.FirstOrDefault(x => x.GetId() == ptapId);
+
+            amountToPay = selectedTap.GetPricePerLiter();
             // Do fuelling 
-            amountToPay += (ptap.GetPricePerLiter() * (tankSpeed / 1000));
-            ptap.DecreaseFuelLevelOfTank(tankSpeed);
+            amountToPay += (selectedTap.GetPricePerLiter() * (tankSpeed / 1000));
+            selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
             alreadyFuelledVolume += tankSpeed;
             System.Threading.Thread.Sleep(1000);
 
