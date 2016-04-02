@@ -26,16 +26,16 @@ namespace Petrolstation.UserInterface
             bool parsingsucceded = Int32.TryParse(input, out pumpId);
             if (parsingsucceded)
             {
-                FuelOnPump(pumpId);
+                ChooseTapForFuelling(pumpId);
             }
         }
 
-        static internal void FuelOnPump(int ppumpId)
+        static internal void ChooseTapForFuelling(int ppumpId)
         {
             Console.WriteLine("Current Selected PumpId: " + ppumpId);
-            Console.Write("Select the tap with his number\nThe Taps: {");
-            PetrolPump petrolpump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
-            foreach (KeyValuePair<int, string> tap in petrolpump.GetListOfTapsId())
+            Console.Write("Select the tap with his number for the fuelling\nThe Taps: {");
+            PetrolPump selectedPetrolpump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
+            foreach (KeyValuePair<int, string> tap in selectedPetrolpump.GetListOfTapsId())
             {
 
                 Console.Write(String.Format("{0} : {1}, ", tap.Key, tap.Value));
@@ -45,7 +45,28 @@ namespace Petrolstation.UserInterface
             string input = Console.ReadLine();
             int tapId;
             bool parsingsucceded = Int32.TryParse(input, out tapId);
-            PetrolPump selectedPump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
+            if (parsingsucceded)
+            {
+                DoTheFuelling(selectedPetrolpump, tapId);
+            }
+            
+        }
+
+        static internal void DoTheFuelling(PetrolPump ppetrolPump, int ptapId)
+        {
+            ppetrolPump.PrepareFuelling(ptapId);
+            string inputKey;
+            Console.WriteLine("Do the fuelling with the key 'f' and exit the fuelling process with 'q'.");
+            do
+            {
+                ConsoleKeyInfo input = Console.ReadKey();
+                inputKey = input.ToString();
+                if (inputKey == "f")
+                {
+                    int alreadyFuelled = ppetrolPump.Fuelling();
+                    Console.WriteLine("Already Fuelled in ml : {0}", alreadyFuelled);
+                }
+            } while (inputKey != "q");
         }
     }
 }
