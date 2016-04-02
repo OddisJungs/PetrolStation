@@ -57,7 +57,7 @@ namespace Petrolstation.Businesslogic
         /// </summary>
         /// <param name="ptap"></param>
         /// <returns></returns>
-        public int PrepareFuelling(int ptapId)
+        public void PrepareFuelling(int ptapId)
         {
             foreach(Tap oneTap in taps)
             {
@@ -75,15 +75,15 @@ namespace Petrolstation.Businesslogic
             alreadyFuelledVolume += tankSpeed;
 
             Save();
-            return alreadyFuelledVolume;
         }
 
-        public void Fuelling()
+        public int Fuelling()
         {
             amountToPay += (selectedTap.GetPricePerLiter()*(tankSpeed/1000));
             selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
             alreadyFuelledVolume += tankSpeed;
             Save();
+            return alreadyFuelledVolume;
         }
 
         /// <summary>
