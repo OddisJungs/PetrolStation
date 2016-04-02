@@ -103,6 +103,7 @@ namespace Petrolstation.UserInterface
             string input = Console.ReadLine();
             if (input.ToLower().Contains("create"))
             {
+
                 // the pump add calls
                 //new Tap(petrolpump.Fuelling, );
                 // MUST ADD AN FuelTankList FIRST!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -117,7 +118,8 @@ namespace Petrolstation.UserInterface
             Console.Write("Current Fueltanks: { ");
             foreach (int id in PetrolStationObjectController.GetInstance().GetInstanceIds<FuelTank>())
             {
-                Console.Write(String.Format("{0} ", id));
+                
+                Console.Write(String.Format("{0} : {1}, ", id, PetrolStationObjectController.GetInstance().GetObjectInstance<FuelTank>(id).GetFuelTypeName()));
             }
             Console.Write("}\n");
             string input = Console.ReadLine();
@@ -132,7 +134,8 @@ namespace Petrolstation.UserInterface
                 string fueltypename = Console.ReadLine();
                 Console.Write("The PricePerLiter (In Rp.):  ");
                 int priceperliter = Int32.Parse(Console.ReadLine());
-                new FuelTank(tankVolume, criticalLevel, new Fueltype(fueltypename, priceperliter));
+                Fueltype fueltype = new Fueltype(fueltypename, priceperliter);
+                new FuelTank(tankVolume, criticalLevel, fueltype);
                 Console.WriteLine("Fueltank created!");
             }            
         }

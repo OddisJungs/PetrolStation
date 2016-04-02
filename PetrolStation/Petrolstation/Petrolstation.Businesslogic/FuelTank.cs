@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace Petrolstation.Businesslogic
             fuelLevel = 0;
             lowCriticalVolumePercent = plowCriticalVolumePercent;
             fuelType = pfuelType;
+            Save();
         }
 
         /// <summary>
@@ -34,8 +36,13 @@ namespace Petrolstation.Businesslogic
         {
             fuelLevel = fuelLevel - pamount;
             CheckIfCritical();
+            Save();
         }
 
+        public void FillUp()
+        {
+            fuelLevel = maxLevel;
+        }
         /// <summary>
         /// Get the value the Method 'GetPricePerLiter' from the 'fuelType'.
         /// </summary>

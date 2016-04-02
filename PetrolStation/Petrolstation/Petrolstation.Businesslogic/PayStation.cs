@@ -42,6 +42,7 @@ namespace Petrolstation.Businesslogic
         public void SetAmountToPay(int ppumpId)
         {
             amountToPay = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId).GetAmountToPay();
+            Save();
         }
 
         /// <summary>
@@ -68,6 +69,7 @@ namespace Petrolstation.Businesslogic
                 CreateQuittance();
                 ReturnBackMoney();
             }
+            Save();
         }
 
         /// <summary>
@@ -95,7 +97,7 @@ namespace Petrolstation.Businesslogic
                     }
                 }
             }
-
+            Save();
         }
 
     }
