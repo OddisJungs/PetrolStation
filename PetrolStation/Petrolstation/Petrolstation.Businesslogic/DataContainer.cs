@@ -43,13 +43,15 @@ namespace Petrolstation.Businesslogic
         }
 
         /// <summary>
-        /// Get all quittances of this day.
+        /// Returns the tanked milliliters of the timespan
         /// </summary>
+        /// <param name="pfueltype"></param>
+        /// <param name="pminDate"></param>
         /// <returns></returns>
-        public List<Quittance> GetQuittanceOfThisDay()
+        public int GetMillilitersTankedSinceDate(Fueltype pfueltype, DateTime pminDate)
         {
-            List<Quittance> listQuittanceOfThisDay = new List<Quittance>();
             string filespath = Path.Combine(path, typeof(Quittance).Name);
+            int milliliterstanked = 0;
             try
             {
                 foreach (string file in Directory.GetFiles(filespath))
@@ -57,149 +59,27 @@ namespace Petrolstation.Businesslogic
                     using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
                     {
                         BinaryFormatter binaryFormatter = new BinaryFormatter();
-                        Quittance quittance = (Quittance)binaryFormatter.Deserialize(fileStream);
-                        if (quittance.GetDay() == DateTime.Now.Day)
+                        Quittance quittance = (Quittance) binaryFormatter.Deserialize(fileStream);
+                        if (quittance.GetCreatedAt() > pminDate &&
+                            quittance.GetFuelType().GetName() == pfueltype.GetName())
                         {
-                            listQuittanceOfThisDay.Add((Quittance)binaryFormatter.Deserialize(fileStream));
+                            milliliterstanked += quittance.GetMililitersTanked();
                         }
                     }
                 }
-                return listQuittanceOfThisDay;
             }
             catch
             {
-                return null;
-            }
-        }
 
-        /// <summary>
-        /// Get all quittances of the last week.
-        /// </summary>
-        /// <returns></returns>
-        public List<Quittance> GetQuittanceOfLastWeek()
-        {
-            List<Quittance> listQuittanceOfMonth = new List<Quittance>();
-            string filespath = Path.Combine(path, typeof(Quittance).Name);
-            try
-            {
-                foreach (string file in Directory.GetFiles(filespath))
-                {
-                    using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
-                    {
-                        BinaryFormatter binaryFormatter = new BinaryFormatter();
-                        Quittance quittance = (Quittance)binaryFormatter.Deserialize(fileStream);
-                        if (quittance.GetDay() >= quittance.GetLastWeek())
-                        {
-                            listQuittanceOfMonth.Add((Quittance)binaryFormatter.Deserialize(fileStream));
-                        }
-                    }
-                }
-                return listQuittanceOfMonth;
             }
-            catch
-            {
-                return null;
-            }
+            return milliliterstanked;
         }
+    }
 
-        /// <summary>
-        /// Get all the quittances of the last month.
-        /// </summary>
-        /// <returns></returns>
-        public List<Quittance> GetQuittanceOfLastMonth()
-        {
-            List<Quittance> listQuittanceOfMonth = new List<Quittance>();
-            string filespath = Path.Combine(path, typeof(Quittance).Name);
-            try
-            {
-                foreach (string file in Directory.GetFiles(filespath))
-                {
-                    using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
-                    {
-                        BinaryFormatter binaryFormatter = new BinaryFormatter();
-                        Quittance quittance = (Quittance)binaryFormatter.Deserialize(fileStream);
-                        if (quittance.GetMonth() == quittance.GetLastMonth())
-                        {
-                            listQuittanceOfMonth.Add((Quittance)binaryFormatter.Deserialize(fileStream));
-                        }                        
-                    }
-                }
-                return listQuittanceOfMonth;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Get all the quittances of the last year.
-        /// </summary>
-        /// <returns></returns>
-        public List<Quittance> GetQuittanceOfLastYear()
-        {
-            List<Quittance> listQuittanceOfLastYear = new List<Quittance>();
-            string filespath = Path.Combine(path, typeof(Quittance).Name);
-            try
-            {
-                foreach (string file in Directory.GetFiles(filespath))
-                {
-                    using (FileStream fileStream = File.Open(Path.Combine(filespath, file), FileMode.Open))
-                    {
-                        BinaryFormatter binaryFormatter = new BinaryFormatter();
-                        Quittance quittance = (Quittance)binaryFormatter.Deserialize(fileStream);
-                        if (quittance.GetYear() == quittance.GetLastYear())
-                        {
-                            listQuittanceOfLastYear.Add((Quittance)binaryFormatter.Deserialize(fileStream));
-                        }
-                    }
-                }
-                return listQuittanceOfLastYear;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Get all earnings of this day.
-        /// </summary>
-        /// <returns></returns>
-        public int EarningsThisDay()
-        {
-            List<Quittance> quittancesThisDay = GetQuittanceOfThisDay();
-            return quittancesThisDay.Sum(x => x.GetAmountToPay());
-        }
-
-        /// <summary>
-        /// Get all earnings of this/last week.
-        /// </summary>
-        /// <returns></returns>
-        public int EarningsThisWeek()
-        {
-            List<Quittance> quittancesLastWeek = GetQuittanceOfLastWeek();
-            return quittancesLastWeek.Sum(x => x.GetAmountToPay());
-        }
-
-        /// <summary>
-        /// Get all earnings of last month.
-        /// </summary>
-        /// <returns></returns>
-        public int EarningsLastMonth()
-        {
-            List<Quittance> quittancesLastMonth = GetQuittanceOfLastMonth();
-            return quittancesLastMonth.Sum(x => x.GetAmountToPay());
-        }
-
-        /// <summary>
-        /// Get all earnings of last year.
-        /// </summary>
-        /// <returns></returns>
-        public int EarningLastYear()
-        {
-            List<Quittance> quittancesLastYear = GetQuittanceOfLastYear();
-            return quittancesLastYear.Sum(x => x.GetAmountToPay());
-        }
+    public enum Timespan
+    {
+        LastYear = 1,
+        LastMonth = 2,
+        LastWeek = 3
     }
 }
