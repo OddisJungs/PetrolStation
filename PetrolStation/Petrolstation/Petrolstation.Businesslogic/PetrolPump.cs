@@ -68,12 +68,9 @@ namespace Petrolstation.Businesslogic
             }
 
             selectedTap = taps.FirstOrDefault(x => x.GetId() == ptapId);
-
             amountToPay = 0;
             // Do fuelling 
             selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
-            alreadyFuelledVolume += tankSpeed;
-
             Save();
         }
 
