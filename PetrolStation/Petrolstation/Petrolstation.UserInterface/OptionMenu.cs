@@ -59,7 +59,6 @@ namespace Petrolstation.UserInterface
             {
                 int pumpId;
                 bool parsingsucceded = Int32.TryParse(input, out pumpId);
-                PetrolPump pump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(pumpId);
                 if (parsingsucceded)
                 {
                     ListOrCreateTap(pumpId);
