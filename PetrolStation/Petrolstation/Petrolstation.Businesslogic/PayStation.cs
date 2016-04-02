@@ -33,6 +33,7 @@ namespace Petrolstation.Businesslogic
             moneyContainers.Add(new MoneyContainer(20000, 500, 15.5, 88.5));
             moneyContainers.Add(new MoneyContainer(100000, 500, 15.5, 88.5));
             moneyContainers = moneyContainers.OrderByDescending(x => x.GetWorth()).ToList();
+            currentSelectedPumpId = 0;
         }
 
         /// <summary>

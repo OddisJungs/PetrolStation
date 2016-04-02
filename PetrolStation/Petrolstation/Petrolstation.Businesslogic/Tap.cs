@@ -10,7 +10,6 @@ namespace Petrolstation.Businesslogic
     public class Tap
     {
         // private members
-        private Func<Tap, int> fuellingMethod;
         private FuelTank fuelTank;
         private bool locked;
         private int id;
@@ -43,6 +42,11 @@ namespace Petrolstation.Businesslogic
         public void Unlock()
         {
             locked = false;
+        }
+
+        public bool IsLocked()
+        {
+            return locked;
         }
 
         /// <summary>
