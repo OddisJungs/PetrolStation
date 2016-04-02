@@ -13,13 +13,12 @@ namespace Petrolstation.Businesslogic
         private const int tankSpeed = 50; // How Many ml per second are tanked
         private int amountToPay = 0;
         private int alreadyFuelledVolume = 0;
-        private List<Tap> taps;
+        private List<Tap> taps = new List<Tap>();
 
         // Constructor
         public PetrolPump() : base()
         {
-            // Add himself to the PetrolPumpController
-            taps = new List<Tap>();
+
         }
 
         // public methods
@@ -34,18 +33,19 @@ namespace Petrolstation.Businesslogic
         {
             int id = taps.Count() + 1;
             taps.Add(new Tap(this.StartFuelling, pfuelTank, id));
+            Save();
         }
 
         /// <summary>
         /// Return the Id's of all objects in the list 'taps'.
         /// </summary>
         /// <returns></returns>
-        public List<int> GetListOfTapsId()
+        public Dictionary<int, string> GetListOfTapsId()
         {
-            List<int> tapIds = new List<int>();
+            Dictionary<int, string> tapIds = new Dictionary<int, string>();
             foreach (Tap tap in taps)
             {
-                tapIds.Add(tap.GetId());
+                tapIds.Add(tap.GetId(), tap.GetFuelTypeName());
             }
             return tapIds;
         }
@@ -72,6 +72,7 @@ namespace Petrolstation.Businesslogic
             alreadyFuelledVolume += tankSpeed;
             System.Threading.Thread.Sleep(1000);
 
+            Save();
             return alreadyFuelledVolume;
         }
 
@@ -93,6 +94,7 @@ namespace Petrolstation.Businesslogic
             {
                 tap.Unlock();
             }
+            Save();
         }
 
         /// <summary>
@@ -101,11 +103,13 @@ namespace Petrolstation.Businesslogic
         public void ResetAmountToPay()
         {
             amountToPay = 0;
+            Save();
         }
 
         public void SetVolumeToNull()
         {
             alreadyFuelledVolume = 0;
+            Save();
         }
     }
 }

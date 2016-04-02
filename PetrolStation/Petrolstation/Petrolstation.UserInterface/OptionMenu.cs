@@ -64,7 +64,39 @@ namespace Petrolstation.UserInterface
                 int pumpId;
                 Int32.TryParse(input, out pumpId);
                 PetrolPump pump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(pumpId);
-                ModifyOrCreateTap(pumpId);
+                ListOrCreateTap(pumpId);
+            }
+        }
+
+        static internal void ListOrCreateTap(int ppumpId)
+        {
+            Console.WriteLine("Current Selected PumpId: " + ppumpId);
+            Console.Write("Select a Tap or create one with 'create'\nThe Taps: {");
+            PetrolPump petrolpump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
+            foreach (KeyValuePair<int, string> tap in petrolpump.GetListOfTapsId())
+            {
+
+                Console.WriteLine(String.Format("{0} : {1}, ", tap.Key, tap.Value));
+            }
+
+            Console.WriteLine(" }");
+            string input = Console.ReadLine();
+            if (input.ToLower().Contains("create"))
+            {
+
+                Console.WriteLine("With fueltank is connected to new tap?");
+                Console.Write("{");
+                foreach (int id in PetrolStationObjectController.GetInstance().GetInstanceIds<FuelTank>())
+                {
+                    Console.Write(String.Format("{0} : {1}, ", id, PetrolStationObjectController.GetInstance().GetObjectInstance<FuelTank>(id).GetFuelTypeName()));
+                }
+                Console.Write("}");
+                input = Console.ReadLine();
+                int inputId = Int32.Parse(input);
+                FuelTank fuelTank = PetrolStationObjectController.GetInstance().GetObjectInstance<FuelTank>(inputId);
+                petrolpump.AddTap(fuelTank);
+
+                Show();
             }
         }
 
@@ -89,28 +121,6 @@ namespace Petrolstation.UserInterface
         }
 
 
-        static internal void ModifyOrCreateTap(int ppumpId)
-        {
-            Console.WriteLine("Current Selected PumpId: " + ppumpId);
-            Console.Write("Select a Tap or create one with 'create'\nThe Taps: {");
-            PetrolPump petrolpump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
-            foreach (int id in petrolpump.GetListOfTapsId())
-            {
-                Console.WriteLine(String.Format("{0} ", id));
-            }
-
-            Console.WriteLine(" }");
-            string input = Console.ReadLine();
-            if (input.ToLower().Contains("create"))
-            {
-
-                // the pump add calls
-                //new Tap(petrolpump.Fuelling, );
-                // MUST ADD AN FuelTankList FIRST!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Console.Write("Created one Tap\n");
-                Show();
-            }
-        }
 
         private static void ListOrCreateFueltank()
         {
