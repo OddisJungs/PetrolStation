@@ -11,6 +11,7 @@ namespace Petrolstation.UserInterface
     {
         static internal void Show()
         {
+            Console.Clear();
             Console.WriteLine("Welcome To the Option Menu");
             Console.WriteLine("Press 1: Modify or Create PetrolPump");
             Console.WriteLine("Press 2: List PayStation");
