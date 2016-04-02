@@ -47,11 +47,12 @@ namespace Petrolstation.Businesslogic
         /// </summary>
         /// <param name="pfueltype"></param>
         /// <param name="pminDate"></param>
-        /// <returns></returns>
-        public int GetMillilitersTankedSinceDate(Fueltype pfueltype, DateTime pminDate)
+        /// <returns>Tuple(Eraned Money, Milliliterstanked)</returns>
+        public Tuple<int, int> GetEarningsSinceDate(Fueltype pfueltype, DateTime pminDate)
         {
             string filespath = Path.Combine(path, typeof(Quittance).Name);
             int milliliterstanked = 0;
+            int earanedMoney = 0;
             try
             {
                 foreach (string file in Directory.GetFiles(filespath))
@@ -64,6 +65,7 @@ namespace Petrolstation.Businesslogic
                             quittance.GetFuelType().GetName() == pfueltype.GetName())
                         {
                             milliliterstanked += quittance.GetMililitersTanked();
+                            earanedMoney += quittance.GetAmountToPay();
                         }
                     }
                 }
@@ -72,14 +74,7 @@ namespace Petrolstation.Businesslogic
             {
 
             }
-            return milliliterstanked;
+            return new Tuple<int, int>(earanedMoney, milliliterstanked) ;
         }
-    }
-
-    public enum Timespan
-    {
-        LastYear = 1,
-        LastMonth = 2,
-        LastWeek = 3
     }
 }
