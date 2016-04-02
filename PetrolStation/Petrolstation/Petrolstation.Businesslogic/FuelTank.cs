@@ -31,7 +31,7 @@ namespace Petrolstation.Businesslogic
         /// <summary>
         /// Decrease the actual value of 'fuelLevel'.
         /// </summary>
-        /// <param name="pamount"></param>
+        /// <param name="pamount">The amount in milliliters</param>
         public void DecreaseFuelLevel(int pamount)
         {
             fuelLevel = fuelLevel - pamount;

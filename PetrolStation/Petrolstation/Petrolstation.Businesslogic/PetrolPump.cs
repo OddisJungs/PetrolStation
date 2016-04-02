@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
@@ -10,9 +11,10 @@ namespace Petrolstation.Businesslogic
     public class PetrolPump : PetrolStationObject
     {
         // private members
-        private const int tankSpeed = 50; // How Many ml per second are tanked
+        private const int tankSpeed = 500; // How Many ml per second are tanked
         private int amountToPay = 0;
         private int alreadyFuelledVolume = 0;
+        private Tap selectedTap;
         private List<Tap> taps = new List<Tap>();
 
         // Constructor
@@ -55,7 +57,7 @@ namespace Petrolstation.Businesslogic
         /// </summary>
         /// <param name="ptap"></param>
         /// <returns></returns>
-        public int StartFuelling(int ptapId)
+        public int PrepareFuelling(int ptapId)
         {
             foreach(Tap oneTap in taps)
             {
@@ -65,17 +67,23 @@ namespace Petrolstation.Businesslogic
                 }
             }
 
-            Tap selectedTap = taps.FirstOrDefault(x => x.GetId() == ptapId);
+            selectedTap = taps.FirstOrDefault(x => x.GetId() == ptapId);
 
-            amountToPay = selectedTap.GetPricePerLiter();
+            amountToPay = 0;
             // Do fuelling 
-            amountToPay += (selectedTap.GetPricePerLiter() * (tankSpeed / 1000));
             selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
             alreadyFuelledVolume += tankSpeed;
-            System.Threading.Thread.Sleep(1000);
 
             Save();
             return alreadyFuelledVolume;
+        }
+
+        public void Fuelling()
+        {
+            amountToPay += (selectedTap.GetPricePerLiter()*(tankSpeed/1000));
+            selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
+            alreadyFuelledVolume += tankSpeed;
+            Save();
         }
 
         /// <summary>
