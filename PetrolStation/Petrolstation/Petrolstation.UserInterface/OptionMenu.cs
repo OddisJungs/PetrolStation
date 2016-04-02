@@ -35,11 +35,6 @@ namespace Petrolstation.UserInterface
                         break;
                 }
             }
-            else
-            {
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!! INVALID INPUT !!!!!!!!!!!!!!!!!");
-                Show();
-            }
         }
 
         static internal void ModifyOrCreatePump()
@@ -57,29 +52,33 @@ namespace Petrolstation.UserInterface
                 // the pump add calls
                 new PetrolPump();
                 Console.Write("Created one PetrolPump\n");
-                Show();
+                ModifyOrCreatePump();
             }
             else
             {
                 int pumpId;
-                Int32.TryParse(input, out pumpId);
+                bool parsingsucceded = Int32.TryParse(input, out pumpId);
                 PetrolPump pump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(pumpId);
-                ListOrCreateTap(pumpId);
+                if (parsingsucceded)
+                {
+                    ListOrCreateTap(pumpId);
+                }
+                Show();
             }
         }
 
         static internal void ListOrCreateTap(int ppumpId)
         {
             Console.WriteLine("Current Selected PumpId: " + ppumpId);
-            Console.Write("Select a Tap or create one with 'create'\nThe Taps: {");
+            Console.Write("Create a new Tap with 'create'\nThe Current Taps: {");
             PetrolPump petrolpump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
             foreach (KeyValuePair<int, string> tap in petrolpump.GetListOfTapsId())
             {
 
-                Console.WriteLine(String.Format("{0} : {1}, ", tap.Key, tap.Value));
+                Console.Write(String.Format("{0} : {1}, ", tap.Key, tap.Value));
             }
 
-            Console.WriteLine(" }");
+            Console.Write(" }\n");
             string input = Console.ReadLine();
             if (input.ToLower().Contains("create"))
             {
@@ -96,6 +95,10 @@ namespace Petrolstation.UserInterface
                 FuelTank fuelTank = PetrolStationObjectController.GetInstance().GetObjectInstance<FuelTank>(inputId);
                 petrolpump.AddTap(fuelTank);
 
+                ListOrCreateTap(ppumpId);
+            }
+            else
+            {
                 Show();
             }
         }
@@ -113,6 +116,7 @@ namespace Petrolstation.UserInterface
             if (input.ToLower().Contains("create"))
             {
                 new PayStation();
+                ListPayStation();
             }
             else
             {
@@ -147,6 +151,12 @@ namespace Petrolstation.UserInterface
                 Fueltype fueltype = new Fueltype(fueltypename, priceperliter);
                 new FuelTank(tankVolume, criticalLevel, fueltype);
                 Console.WriteLine("Fueltank created!");
+
+                ListOrCreateFueltank();
+            }
+            else
+            {
+                Show();
             }            
         }
     }

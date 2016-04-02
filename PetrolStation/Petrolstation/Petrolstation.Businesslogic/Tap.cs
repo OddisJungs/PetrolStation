@@ -18,13 +18,11 @@ namespace Petrolstation.Businesslogic
         // Constructor
 
         /// <summary>
-        /// Constructs a Tap object
+        /// Constructs a Tap object, only internal, because the taps should be created in the petrolpump
         /// </summary>
-        /// <param name="pfuellingMethod">The Fuelling-Method of his PetrolPump</param>
-        public Tap(FuelTank pfueltank, int pid)
+        internal Tap(FuelTank pfueltank, int pid)
         {
             locked = false;
-            fuellingMethod = pfuellingMethod;
             fuelTank = pfueltank;
             id = pid;
         }
