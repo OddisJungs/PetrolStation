@@ -114,6 +114,8 @@ namespace Petrolstation.UserInterface
                         }
                     }
                     Console.WriteLine("Thanks for your visit. Goodbye");
+                    PetrolPump selectedPump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId);
+                    selectedPump.SetVolumeToNull();
                 }
                 else
                 {
