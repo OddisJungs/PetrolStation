@@ -12,7 +12,7 @@ namespace Petrolstation.Businesslogic
     {
         // private members
         private const int tankSpeed = 500; // How Many ml per second are tanked
-        private int amountToPay = 0;
+        private double amountToPay = 0; // in Rp
         private int alreadyFuelledVolume = 0;
         private Tap selectedTap;
         private List<Tap> taps = new List<Tap>();
@@ -75,7 +75,7 @@ namespace Petrolstation.Businesslogic
 
         public int Fuelling()
         {
-            amountToPay += (selectedTap.GetPricePerLiter()*(tankSpeed/1000));
+            amountToPay += (selectedTap.GetPricePerLiter()*((double)tankSpeed/1000));
             selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
             alreadyFuelledVolume += tankSpeed;
             Save();
@@ -86,7 +86,7 @@ namespace Petrolstation.Businesslogic
         /// Get the value of 'amountToPay'.
         /// </summary>
         /// <returns></returns>
-        public int GetAmountToPay()
+        public double GetAmountToPay()
         {
             return amountToPay;
         }

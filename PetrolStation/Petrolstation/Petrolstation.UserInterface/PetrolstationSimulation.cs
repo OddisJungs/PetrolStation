@@ -96,7 +96,7 @@ namespace Petrolstation.UserInterface
                         string coinInput = Console.ReadLine();
                         if (!string.IsNullOrEmpty(coinInput))
                         {
-                            int intCoinInput = Int32.Parse((coinInput));
+                            int intCoinInput = Int32.Parse(coinInput);
                             payStation.PayMoney(intCoinInput);
                         }
                         else

@@ -18,7 +18,7 @@ class DataContainer {
 	- path : string
 	+ DataContainer()
 	+ Load<type>() : List<type>
-	+ GetEarningsSinceDate(pfueltype : Fueltype, pminDate:DateTime) : Tuple<int, int>
+    + GetEarningsSinceDate(pfueltype : Fueltype, pminDate:DateTime) : Tuple<int, int>
 }
 
 class DataItem {
@@ -54,15 +54,15 @@ class Fueltype {
 }
 
 class PayStation {
-	- amountToPay : int
+	- amountToPay : double
 	- currentSelectedPumpId : int
-	- returnMoney : int
+	- returnMoney : double
 	+ PayStation()
 	+ SetAmountToPay(ppumpId : int)
-	+ GetAmountToPay()
+	+ GetAmountToPay() : double
 	+ PayMoney(int pworth)
 	+ CreateQuittance()
-	+ ReturnBackMoney()
+	+ ReturnBackMoney() : double
 }
 PayStation "1" --* "0...*" MoneyContainer
 PayStation --|> PetrolStationObject
@@ -82,7 +82,7 @@ class MoneyContainer {
 
 class PetrolPump {
 	- tankSpeed : int
-	- amountToPay : int
+	- amountToPay : double
 	- alreadyFuelledVolume : int
 	- selectedTap : Tap
 	+ PetrolPump()
@@ -91,7 +91,7 @@ class PetrolPump {
 	+ GetListOfTapsId() : Dictionary<int, string>
 	+ PrepareFuelling(ptapId : int)
 	+ Fuelling() : int
-	+ GetAmountToPay() : int
+	+ GetAmountToPay() : double
 	+ UnlockTap()
 	+ ResetAmountToPay()
 	+ SetVolumeToNull()
@@ -109,11 +109,11 @@ PetrolStationObject --|> DataItem
 
 class Quittance {
 	- createdAt : DateTime
-	- amountToPay : int
+	- amountToPay : double
 	- millilitersTanked : int
 	+ Quittance(pamountToPay : int, pmillilitersTanked : int, pfuelType : Fueltype)
 	+ GetCreatedAt() : DateTime
-	+ GetAmountToPay() : int
+	+ GetAmountToPay() : double
 	+ GetMililitersTanked() : int
 	+ GetFuelType() : Fueltype
 }

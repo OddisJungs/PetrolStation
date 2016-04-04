@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,9 +12,9 @@ namespace Petrolstation.Businesslogic
     {
         // private Members
         private List<MoneyContainer> moneyContainers;
-        private int amountToPay;
+        private double amountToPay; // in Rp
         private int currentSelectedPumpId;
-        private int returnMoney;
+        private double returnMoney;
 
         // Konstruktor
         public PayStation() : base()
@@ -34,6 +35,7 @@ namespace Petrolstation.Businesslogic
             moneyContainers.Add(new MoneyContainer(100000, 500, 15.5, 88.5));
             moneyContainers = moneyContainers.OrderByDescending(x => x.GetWorth()).ToList();
             currentSelectedPumpId = 0;
+            Save();
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace Petrolstation.Businesslogic
             Save();
         }
 
-        public int GetAmountToPay()
+        public double GetAmountToPay()
         {
             return amountToPay;
         }
@@ -57,7 +59,7 @@ namespace Petrolstation.Businesslogic
         /// <param name="pworth">Worth of the Money</param>
         public void PayMoney(int pworth)
         {
-            MoneyContainer moneyContainer = moneyContainers.Where(x => x.GetWorth() == pworth).FirstOrDefault();
+            MoneyContainer moneyContainer = moneyContainers.FirstOrDefault(x => x.GetWorth() == pworth);
             if (moneyContainer != null)
             {
                 moneyContainer.IncreaseCount();
@@ -89,7 +91,7 @@ namespace Petrolstation.Businesslogic
         /// <summary>
         /// Give the return money.
         /// </summary>
-        public int ReturnBackMoney()
+        public double ReturnBackMoney()
         {
 
             foreach (MoneyContainer item in moneyContainers)
