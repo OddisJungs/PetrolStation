@@ -4,124 +4,135 @@ skinparam classBackgroundColor #F8F8F8
 skinparam classBorderColor #0066CC
 skinparam classArrowColor #0066CC
 
-
-class UI {
-
+class PetrolStationObjectController {
+	- <u> instance : PetrolStationObjectController
+	+ PetrolStationObjectController()
+	+ GetInstance() : PetrolStationObjectController
+	+ GetInstanceIds<type>() : List<int>
+	+ GetObjectInstance<type>(pid : int) : T
+	+ AddInstance(ppetrolStationObject : PetrolStationObject)
 }
-UI ..> PaystationController : calls
-UI ..> PumpController : calls
+PetrolStationObjectController "1" -- "*" PetrolStationObject
 
-class Paystation {
-  	- amountToPay : int
-        - currentSelectPumpId : int
-        - returnMoney : int
-  	- createQuittance()
-  	+ ReturnBackMoney()
-  	+ SetAmountToPay(ppumpId : int)
-  	+ PayMoney(pworth : int)
-  	+ PayStation()
-}
-
-class PaystationController {
-
+class DataContainer {
+	- path : string
+	+ DataContainer()
+	+ Load<type>() : List<type>
+	+ GetEarningsSinceDate(pfueltype : Fueltype, pminDate:DateTime) : Tuple<int, int>
 }
 
-
-class PetrolPump {
-        - petrolPumpId : int
-        - tankspeed : int
-        - amountToPlay : int
-        + AddTap(ptap : Tap)
-        + SetId(ppumpId : int)
-        + GetId() : int
-	+ UnlockTaps() 
-	+ GetAmountToPay() : decimal
-	+ Fuelling(ptap : Tap) 
-        + PetrolPump()
+class DataItem {
+	- savepath : string
+	- guid : string
+	+ DataItem()
+	+ Save()
+	+ GetSavePath() : string
 }
-note right : Controls the access to the Taps,\nthe fuelling operation and the amount\n to pay at this pump\n 
 
-class Tap {
-       - fuellingMethod : Action
-        - locked : boolean
-	+ Take()
-        + Lock() 
-        + Unlock()
-        + DecreaseFuelLevelOfTank(pamount : int)
-        + GetPricePerLiter() : int
-        + GetFuelTypeName() : string
-        + Tap(pfuellingMethode : Action, pfuelTank : FuelTank)
-}
-note bottom: When Take() method called,\n it will calls the fuellingMethod,\nwhich contains the Fuelling Method of his PetrolPump \nand overgives himself to ther\nlook at \nhttp://stackoverflow.com/questions/7923343/delegate-with-parameters-as-a-parameter
-
-class FuelTank {
-	- maxLevel : int
+class Fueltank {
+	- maxlevel : int
 	- fuelLevel : int
 	- lowCriticalVolumePercent : decimal
-	- highCriticalVolumePercent : decimal
-	+ DecreaseFuelLevel(pamount) : void 
-        + GetPricePerLiter() : int
-        + GetFuelTypeName() : string
-        + FuelTank(pmaxLevel : int, plowCriticalVolumePercent : decimal,  phighCriticalVolumePercent : decimal, pfuelType : Fueltype)
+	- isCritical : bool
+	+ FuelTank(ptankVolume : int, plowCriticalVolumePercent : decimal, pfuelType : Fueltype)
+	+ DecreaseFuelLevel(pamount : int)
+	+ FillUp()
+	+ CheckIfCritical()
+	+ GetPricePerLiter() : int
+	+ GetFuelTypeName() : string
+	+ GetIsCritical() : bool
 }
+Fueltank "1"--o "1" Fueltype
+Fueltank --|> PetrolStationObject
 
 class Fueltype {
 	- name : string
-	- pricePerLiter : decimal
-        - GetPricePerLiter() : int 
-        - GetName() : string
+	- pricePerLiter : int
+	+ Fueltype(pname : string, ppricePerLiter : int)
+	+ GetPricePerLiter() : int
+	+ GetName() : string
 }
-note top : maybe it is a good idea to \nimplement this as a struct
 
-class Quittance {
-	- createdAt : datetime
+class PayStation {
 	- amountToPay : int
-	+ Quittance(amountToPay : datetime, createdAt : datetime)
+	- currentSelectedPumpId : int
+	- returnMoney : int
+	+ PayStation()
+	+ SetAmountToPay(ppumpId : int)
+	+ GetAmountToPay()
+	+ PayMoney(int pworth)
+	+ CreateQuittance()
+	+ ReturnBackMoney()
 }
-
-class PumpController {
-	- instance : PumpController
-	- pumps : List<PetrolPump>
-	- PumpController()
-	+ AddPump(ppetrolPump : PetrolPump)
-	+ GetInstance() : PumpController
-	+ ResetAndUnlockPump(ppumpId : int) 
-	+ GetAmountToPay(ppumpId : int) : int
-}
-note right: This is a Singleton
+PayStation "1" --* "0...*" MoneyContainer
+PayStation --|> PetrolStationObject
 
 class MoneyContainer {
-  - lowCriticalPercent : decimal
-  - maxCriticalPercent : decimal
-  - maxCount : int
-  - count : int
-  - worth : decimal
-  + GetWorth() : decimal
-  + IncreaseCount()
-  + DecreaseCount()
-  + MoneyContainer(pworth : int, pcount : int,\npmaxCount : decimal, maxCritPercent : int, lowCritPercent : decimal)
-  + CheckCiticalPercent() 
-  
+	- lowCriticalPercent : double
+	- maxCriticalPercent : double
+	- maxCount : int
+	- count : int
+	- worth : int
+	+ MoneyContainer(pworth : int, pmaxCount : int, plowCriticalPercent : double, pmaxCriticalPercent : double, pcount=0: int)
+	+ GetWorth() : int
+	+ IncreaseCount()
+	+ DecreaseCount()
+	+ CheckCriticalPercent() 
 }
-note left: coinWorth is in fr
 
-class DataItem {
-	+ Load()
-	+ Save()
+class PetrolPump {
+	- tankSpeed : int
+	- amountToPay : int
+	- alreadyFuelledVolume : int
+	- selectedTap : Tap
+	+ PetrolPump()
+	+ AddTap(ptap : Tap)
+	+ AddTap(pfuelTank : FuelTank)
+	+ GetListOfTapsId() : Dictionary<int, string>
+	+ PrepareFuelling(ptapId : int)
+	+ Fuelling() : int
+	+ GetAmountToPay() : int
+	+ UnlockTap()
+	+ ResetAmountToPay()
+	+ SetVolumeToNull()
 }
-note right: Implements the access to the stored data
+PetrolPump "1" --* "0...*" Tap
+PetrolPump --|> PetrolStationObject
 
-PumpController "1" --* "*" PetrolPump
-Paystation "1" -right-* "*" MoneyContainer
-Paystation .up.> Quittance : creates
-PetrolPump "1" --* "*" Tap
-Tap "*" -right-o "1" FuelTank
-FuelTank "*" -right-* "1" Fueltype
-Quittance ---|> DataItem
-Paystation ---|> DataItem
-PetrolPump ---|> DataItem
-FuelTank ---|> DataItem
-PaystationController "1" ---* "*" Paystation
 
-Tap .up.> PetrolPump : Take() calls Fuelling() as delegate
+class PetrolStationObject  {
+	- id : int
+	+ PetrolStationObject()
+	+ GetId() : int
+	+ SetId(pid : int)
+}
+PetrolStationObject --|> DataItem
+
+class Quittance {
+	- createdAt : DateTime
+	- amountToPay : int
+	- millilitersTanked : int
+	+ Quittance(pamountToPay : int, pmillilitersTanked : int, pfuelType : Fueltype)
+	+ GetCreatedAt() : DateTime
+	+ GetAmountToPay() : int
+	+ GetMililitersTanked() : int
+	+ GetFuelType() : Fueltype
+}
+Quittance "1" --o "1" Fueltype
+Quittance --|> DataItem
+
+class Tap {
+	- id : id
+	- locked : bool
+	+ Tap(pfueltank : FuelTank, pid : int)
+	+ Lock()
+	+ Unlock()
+	+ IsLocked() : bool
+	+ DecreaseFuelLevelOfTank(pamount : int)
+	+ GetPricePerLiter() : int
+	+ GetFuelTypeName() : string
+	+ GetId() : int
+}
+Tap "1" --o "1" Fueltank
+
 @enduml 
