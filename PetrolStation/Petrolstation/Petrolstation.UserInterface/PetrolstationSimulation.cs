@@ -80,18 +80,45 @@ namespace Petrolstation.UserInterface
                 Console.Write(String.Format("{0}, ", id));
             }
             Console.Write("}\n");
-            string input = Console.ReadLine();
-            int intInput = Int32.Parse(input);
-            PayStation payStation = PetrolStationObjectController.GetInstance().GetObjectInstance<PayStation>(intInput);
-            if (payStation != null)
-            {
-                payStation.SetAmountToPay(ppumpId);
-                while (payStation.GetAmountToPay() > 0)
-                {
-                    Console.WriteLine(String.Format("Please Pay a bit money, Amount to pay {0} Rp.", payStation.GetAmountToPay()));
-                    Console.WriteLine("Possible paysizes, 5, 10, 20, 50, 100, ....");
-                }
 
+            string input = Console.ReadLine();
+            if (!string.IsNullOrEmpty(input))
+            {
+                int intInput = Int32.Parse(input);
+                PayStation payStation = PetrolStationObjectController.GetInstance().GetObjectInstance<PayStation>(intInput);
+                if (payStation != null)
+                {
+                    payStation.SetAmountToPay(ppumpId);
+                    while (payStation.GetAmountToPay() >= 0)
+                    {
+                        Console.WriteLine(String.Format("Please Pay a bit money, Amount to pay {0} Rp.", payStation.GetAmountToPay()));
+                        Console.WriteLine("Possible paysizes, 5, 10, 20, 50, 100, 200, 500, 10000, 20000, 50000, 100000");
+                        string coinInput = Console.ReadLine();
+                        if (!string.IsNullOrEmpty(coinInput))
+                        {
+                            int intCoinInput = Int32.Parse((coinInput));
+                            payStation.PayMoney(intCoinInput);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input");
+                        }
+                    }
+
+                    if (payStation.GetAmountToPay() < 0)
+                    {
+                        while (payStation.GetAmountToPay() < 0)
+                        {
+                            Console.WriteLine("You get back: {0}", payStation.ReturnBackMoney());
+                            Console.WriteLine("Still to get back: {0}", payStation.GetAmountToPay());
+                        }
+                    }
+                    Console.WriteLine("Thanks for your visit. Goodbye");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, Jump back to main menu");
+                }
             }
             else
             {

@@ -58,14 +58,14 @@ namespace Petrolstation.Businesslogic
         public void PayMoney(int pworth)
         {
             MoneyContainer moneyContainer = moneyContainers.Where(x => x.GetWorth() == pworth).FirstOrDefault();
-            if(moneyContainer != null)
+            if (moneyContainer != null)
             {
                 moneyContainer.IncreaseCount();
                 amountToPay -= pworth;
             }
 
             // If lower than 0 the he payed enough
-            if(amountToPay <= 0)
+            if (amountToPay <= 0)
             {
                 // Return Money logic
                 returnMoney = amountToPay * -1;
@@ -73,7 +73,6 @@ namespace Petrolstation.Businesslogic
 
                 PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(currentSelectedPumpId).UnlockTaps();
                 CreateQuittance();
-                ReturnBackMoney();
             }
             Save();
         }
@@ -84,26 +83,26 @@ namespace Petrolstation.Businesslogic
         private void CreateQuittance()
         {
             // Do something
-            
+
         }
 
         /// <summary>
         /// Give the return money.
         /// </summary>
-        private void ReturnBackMoney()
+        public int ReturnBackMoney()
         {
-            while (returnMoney != 0)
+
+            foreach (MoneyContainer item in moneyContainers)
             {
-                foreach (MoneyContainer item in moneyContainers)
+                if (item.GetWorth() <= returnMoney)
                 {
-                    if (item.GetWorth() <= returnMoney)
-                    {
-                        returnMoney -= item.GetWorth();
-                        item.DecreaseCount();
-                    }
+                    returnMoney -= item.GetWorth();
+                    item.DecreaseCount();
                 }
             }
             Save();
+            return returnMoney;
+           
         }
 
     }
