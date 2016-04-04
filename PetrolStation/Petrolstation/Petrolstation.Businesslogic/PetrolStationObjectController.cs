@@ -52,7 +52,7 @@ namespace Petrolstation.Businesslogic
         {
             int id = 0;
             bool idIsUsed = true;
-            while(id == idIsUsed)
+            while(idIsUsed)
             {
                 id++;
                 idIsUsed = petrolStationObjectInstances.Exists(x => x.GetType() == ppetrolStationObject.GetType() && x.GetId() == id);

@@ -55,18 +55,18 @@ namespace Petrolstation.UserInterface
         static internal void DoTheFuelling(PetrolPump ppetrolPump, int ptapId)
         {
             ppetrolPump.PrepareFuelling(ptapId);
-            string inputKey;
+            char inputKey;
             Console.WriteLine("Do the fuelling with the key 'f' and exit the fuelling process with 'q'.");
             do
             {
                 ConsoleKeyInfo input = Console.ReadKey();
-                inputKey = input.ToString();
-                if (inputKey == "f")
+                inputKey = input.KeyChar;
+                if (inputKey == 'f')
                 {
                     int alreadyFuelled = ppetrolPump.Fuelling();
                     Console.WriteLine("Already Fuelled in ml : {0}", alreadyFuelled);
                 }
-            } while (inputKey != "q");
+            } while (inputKey != 'q');
         }
     }
 }

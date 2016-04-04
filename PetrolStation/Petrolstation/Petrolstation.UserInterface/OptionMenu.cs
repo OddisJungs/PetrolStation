@@ -89,7 +89,7 @@ namespace Petrolstation.UserInterface
                 {
                     Console.Write(String.Format("{0} : {1}, ", id, PetrolStationObjectController.GetInstance().GetObjectInstance<FuelTank>(id).GetFuelTypeName()));
                 }
-                Console.Write("}");
+                Console.Write("}\n");
                 input = Console.ReadLine();
                 int inputId = Int32.Parse(input);
                 FuelTank fuelTank = PetrolStationObjectController.GetInstance().GetObjectInstance<FuelTank>(inputId);
