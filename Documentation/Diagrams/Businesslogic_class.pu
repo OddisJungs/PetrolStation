@@ -39,6 +39,7 @@ class Fueltank {
 	+ FillUp()
 	+ CheckIfCritical()
 	+ GetPricePerLiter() : int
+        + GetFuelType() : Fueltype
 	+ GetFuelTypeName() : string
 	+ GetIsCritical() : bool
 }
@@ -57,10 +58,12 @@ class PayStation {
 	- amountToPay : int
 	- currentSelectedPumpId : int
 	- returnMoney : int
+- fuelCost : int
 	+ PayStation()
 	+ SetAmountToPay(ppumpId : int)
+- SetFuelCosts()
 	+ GetAmountToPay()
-	+ PayMoney(int pworth)
+	+ PayMoney(pworth : int)
 	+ CreateQuittance()
 	+ ReturnBackMoney()
 }
@@ -92,6 +95,8 @@ class PetrolPump {
 	+ PrepareFuelling(ptapId : int)
 	+ Fuelling() : int
 	+ GetAmountToPay() : int
+        + GetSelectedTap() : Tap
+        + GetAlreadyFuelledVolume() : int
 	+ UnlockTap()
 	+ ResetAmountToPay()
 	+ SetVolumeToNull()
@@ -130,6 +135,7 @@ class Tap {
 	+ DecreaseFuelLevelOfTank(pamount : int)
 	+ GetPricePerLiter() : int
 	+ GetFuelTypeName() : string
+        + GetFueltype() : Fueltype
 	+ GetId() : int
 }
 Tap "1" --o "1" Fueltank

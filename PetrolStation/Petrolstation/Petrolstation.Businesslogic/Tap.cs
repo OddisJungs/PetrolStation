@@ -77,6 +77,15 @@ namespace Petrolstation.Businesslogic
         }
 
         /// <summary>
+        /// Get the value of 'fuelTank.GetFueltype()'.
+        /// </summary>
+        /// <returns></returns>
+        public Fueltype GetFueltype()
+        {
+            return fuelTank.GetFueltype();
+        }
+
+        /// <summary>
         /// Get the value of 'id'.
         /// </summary>
         /// <returns></returns>
