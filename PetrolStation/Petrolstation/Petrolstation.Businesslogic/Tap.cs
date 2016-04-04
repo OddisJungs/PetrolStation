@@ -6,56 +6,83 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
+    [Serializable]
     public class Tap
     {
-        
-
         // private members
-        private Delegate fuellingMethod;
         private FuelTank fuelTank;
         private bool locked;
+        private int id;
 
         // Constructor
+
         /// <summary>
-        /// Constructs a Tap object
+        /// Constructs a Tap object, only internal, because the taps should be created in the petrolpump
         /// </summary>
-        /// <param name="pfuellingMethod">The Fuelling-Method of his PetrolPump</param>
-        public Tap(Delegate pfuellingMethod, FuelTank pfueltank)
+        internal Tap(FuelTank pfueltank, int pid)
         {
             locked = false;
-            fuellingMethod = pfuellingMethod;
             fuelTank = pfueltank;
+            id = pid;
         }
 
         // public Methods
-        public void Take()
-        {
-            fuellingMethod.DynamicInvoke(this);
-        }
 
+        /// <summary>
+        /// Set 'locked' to 'true'.
+        /// </summary>
         public void Lock()
         {
             locked = true;
         }
 
+        /// <summary>
+        /// Set 'locked' to 'false'.
+        /// </summary>
         public void Unlock()
         {
             locked = false;
         }
 
+        public bool IsLocked()
+        {
+            return locked;
+        }
+
+        /// <summary>
+        /// Call the method 'DecreaseFuelLevel' from 'fuelTank'.
+        /// </summary>
+        /// <param name="pamount"></param>
         public void DecreaseFuelLevelOfTank(int pamount)
         {
             fuelTank.DecreaseFuelLevel(pamount);
         }
 
+        /// <summary>
+        /// Get the value of the method 'GetPricePerLiter' from 'fuelTank'.
+        /// </summary>
+        /// <returns></returns>
         public int GetPricePerLiter()
         {
             return fuelTank.GetPricePerLiter();
         }
 
+        /// <summary>
+        /// Get the value of the method 'GetFuelTypeName' from 'fuelTank'.
+        /// </summary>
+        /// <returns></returns>
         public string GetFuelTypeName()
         {
             return fuelTank.GetFuelTypeName();
+        }
+
+        /// <summary>
+        /// Get the value of 'id'.
+        /// </summary>
+        /// <returns></returns>
+        public int GetId()
+        {
+            return id;
         }
     }
 }

@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
-    public class PetrolPump
+    [Serializable]
+    public class PetrolPump : PetrolStationObject
     {
         // private members
-        private const int tankSpeed = 50; // How Many ml per second are tanked
-        private int petrolPumpId;
-        private int amountToPay;
-        private List<Tap> taps;
+        private const int tankSpeed = 500; // How Many ml per second are tanked
+        private int amountToPay = 0;
+        private int alreadyFuelledVolume = 0;
+        private Tap selectedTap;
+        private List<Tap> taps = new List<Tap>();
 
         // Constructor
-        public PetrolPump()
+        public PetrolPump() : base()
         {
-            // Add himself to the PetrolPumpController
-            petrolPumpId = 0;
-            PetrolPumpController.GetInstance().AddPump(this);
-            taps = new List<Tap>();
+
         }
 
         // public methods
@@ -28,53 +28,94 @@ namespace Petrolstation.Businesslogic
         {
             taps.Add(ptap);
         }
-       
-        public void SetId(int ppumpId)
+
+        // Set a the id for the actual object.
+        // Add a new tap to the petrolpump.
+        public void AddTap(FuelTank pfuelTank)
         {
-            petrolPumpId = ppumpId;
+            int id = taps.Count() + 1;
+            taps.Add(new Tap(pfuelTank, id));
+            Save();
         }
 
-        public int GetId()
+        /// <summary>
+        /// Return the Id's of all objects in the list 'taps'.
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, string> GetListOfTapsId()
         {
-            return petrolPumpId;
+            Dictionary<int, string> tapIds = new Dictionary<int, string>();
+            foreach (Tap tap in taps)
+            {
+                tapIds.Add(tap.GetId(), tap.GetFuelTypeName());
+            }
+            return tapIds;
         }
 
-        public void Fuelling(Tap ptap)
+        /// <summary>
+        /// Start the fuelling process.
+        /// </summary>
+        /// <param name="ptap"></param>
+        /// <returns></returns>
+        public void PrepareFuelling(int ptapId)
         {
             foreach(Tap oneTap in taps)
             {
-                if (oneTap != ptap)
+                if (oneTap.GetId() != ptapId)
                 {
                     oneTap.Lock();
                 }
             }
 
-            amountToPay = ptap.GetPricePerLiter();
-            // Do fuelling 
-            for (int i = 0; i < 15; i++)
-            {
-                amountToPay += (ptap.GetPricePerLiter() * (tankSpeed/1000));
-                ptap.DecreaseFuelLevelOfTank(tankSpeed);
-                System.Threading.Thread.Sleep(1000);
-            }
+            selectedTap = taps.FirstOrDefault(x => x.GetId() == ptapId);
+            amountToPay = 0;
+
+            Save();
         }
 
+        public int Fuelling()
+        {
+            amountToPay += (selectedTap.GetPricePerLiter()*(tankSpeed/1000));
+            selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
+            alreadyFuelledVolume += tankSpeed;
+            Save();
+            return alreadyFuelledVolume;
+        }
+
+        /// <summary>
+        /// Get the value of 'amountToPay'.
+        /// </summary>
+        /// <returns></returns>
         public int GetAmountToPay()
         {
             return amountToPay;
         }
 
+        /// <summary>
+        /// Unlock all tap objects in the list 'taps'.
+        /// </summary>
         public void UnlockTaps()
         {
             foreach (Tap tap in taps)
             {
                 tap.Unlock();
             }
+            Save();
         }
 
+        /// <summary>
+        /// Reset the Amount to Pay after paying.
+        /// </summary>
         public void ResetAmountToPay()
         {
             amountToPay = 0;
+            Save();
+        }
+
+        public void SetVolumeToNull()
+        {
+            alreadyFuelledVolume = 0;
+            Save();
         }
     }
 }

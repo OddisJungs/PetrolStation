@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Petrolstation.Businesslogic
 {
-    public class PayStation
+    [Serializable]
+    public class PayStation : PetrolStationObject
     {
         // private Members
         private List<MoneyContainer> moneyContainers;
@@ -15,7 +16,7 @@ namespace Petrolstation.Businesslogic
         private int returnMoney;
 
         // Konstruktor
-        public PayStation()
+        public PayStation() : base()
         {
             moneyContainers = new List<MoneyContainer>();
             moneyContainers.Add(new MoneyContainer(5, 500, 15.5, 88.5));
@@ -32,11 +33,22 @@ namespace Petrolstation.Businesslogic
             moneyContainers.Add(new MoneyContainer(20000, 500, 15.5, 88.5));
             moneyContainers.Add(new MoneyContainer(100000, 500, 15.5, 88.5));
             moneyContainers = moneyContainers.OrderByDescending(x => x.GetWorth()).ToList();
+            currentSelectedPumpId = 0;
         }
 
+        /// <summary>
+        /// Set 'amountToPay' to the return value of the methode 'GetAmountToPay'.
+        /// </summary>
+        /// <param name="ppumpId"></param>
         public void SetAmountToPay(int ppumpId)
         {
-            amountToPay = PetrolPumpController.GetInstance().GetAmountToPay(ppumpId);
+            amountToPay = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId).GetAmountToPay();
+            Save();
+        }
+
+        public int GetAmountToPay()
+        {
+            return amountToPay;
         }
 
         /// <summary>
@@ -46,44 +58,51 @@ namespace Petrolstation.Businesslogic
         public void PayMoney(int pworth)
         {
             MoneyContainer moneyContainer = moneyContainers.Where(x => x.GetWorth() == pworth).FirstOrDefault();
-            if(moneyContainer != null)
+            if (moneyContainer != null)
             {
                 moneyContainer.IncreaseCount();
                 amountToPay -= pworth;
             }
 
             // If lower than 0 the he payed enough
-            if(amountToPay <= 0)
+            if (amountToPay <= 0)
             {
                 // Return Money logic
                 returnMoney = amountToPay * -1;
                 amountToPay = 0;
 
-                PetrolPumpController.GetInstance().ResetAndUnlockPump(currentSelectedPumpId);
+                PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(currentSelectedPumpId).UnlockTaps();
                 CreateQuittance();
-                ReturnBackMoney();
             }
+            Save();
         }
 
+        /// <summary>
+        /// Create a new Quittance of this Fuelling.
+        /// </summary>
         private void CreateQuittance()
         {
             // Do something
+
         }
 
-        private void ReturnBackMoney()
+        /// <summary>
+        /// Give the return money.
+        /// </summary>
+        public int ReturnBackMoney()
         {
-            while (returnMoney != 0)
+
+            foreach (MoneyContainer item in moneyContainers)
             {
-                foreach (MoneyContainer item in moneyContainers)
+                if (item.GetWorth() <= returnMoney)
                 {
-                    if (item.GetWorth() <= returnMoney)
-                    {
-                        returnMoney -= item.GetWorth();
-                        item.DecreaseCount();
-                    }
+                    returnMoney -= item.GetWorth();
+                    item.DecreaseCount();
                 }
             }
-
+            Save();
+            return returnMoney;
+           
         }
 
     }
