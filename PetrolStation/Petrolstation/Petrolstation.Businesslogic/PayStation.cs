@@ -46,6 +46,11 @@ namespace Petrolstation.Businesslogic
             Save();
         }
 
+        public int GetAmountToPay()
+        {
+            return amountToPay;
+        }
+
         /// <summary>
         /// Give One Money Unit
         /// </summary>

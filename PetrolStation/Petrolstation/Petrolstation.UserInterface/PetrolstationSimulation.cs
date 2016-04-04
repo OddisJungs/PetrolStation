@@ -67,6 +67,38 @@ namespace Petrolstation.UserInterface
                     Console.WriteLine("Already Fuelled in ml : {0}", alreadyFuelled);
                 }
             } while (inputKey != 'q');
+            Console.WriteLine("Fuelling finished");
+            PayTheFuelling(ppetrolPump.GetId());
         }
+
+        static internal void PayTheFuelling(int ppumpId)
+        {
+            Console.WriteLine("Time to Pay, please select a Paystation");
+            Console.Write("{");
+            foreach (int id in PetrolStationObjectController.GetInstance().GetInstanceIds<PayStation>())
+            {
+                Console.Write(String.Format("{0}, ", id));
+            }
+            Console.Write("}\n");
+            string input = Console.ReadLine();
+            int intInput = Int32.Parse(input);
+            PayStation payStation = PetrolStationObjectController.GetInstance().GetObjectInstance<PayStation>(intInput);
+            if (payStation != null)
+            {
+                payStation.SetAmountToPay(ppumpId);
+                while (payStation.GetAmountToPay() > 0)
+                {
+                    Console.WriteLine(String.Format("Please Pay a bit money, Amount to pay {0} Rp.", payStation.GetAmountToPay()));
+                    Console.WriteLine("Possible paysizes, 5, 10, 20, 50, 100, ....");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Invalid input, Jump back to main menu");
+            }
+
+        }
+
     }
 }
