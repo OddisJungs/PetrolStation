@@ -12,12 +12,12 @@ namespace Petrolstation.Businesslogic
     {
         // private members
         private DateTime createdAt;
-        private int amountToPay;
+        private double amountToPay;
         private int millilitersTanked;
         private Fueltype fuelType;
 
         // public Constructor
-        public Quittance(int pamountToPay, int pmillilitersTanked, Fueltype pfuelType)
+        public Quittance(double pamountToPay, int pmillilitersTanked, Fueltype pfuelType)
         {
             createdAt = DateTime.Now;
             amountToPay = pamountToPay;
@@ -39,7 +39,7 @@ namespace Petrolstation.Businesslogic
         /// Get the value of 'amountType'.
         /// </summary>
         /// <returns></returns>
-        public int GetAmountToPay()
+        public double GetAmountToPay()
         {
             return amountToPay;
         }

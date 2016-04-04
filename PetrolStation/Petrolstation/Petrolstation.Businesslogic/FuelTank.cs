@@ -53,6 +53,15 @@ namespace Petrolstation.Businesslogic
         }
 
         /// <summary>
+        /// Get the value of 'fuelType'.
+        /// </summary>
+        /// <returns></returns>
+        public Fueltype GetFueltype()
+        {
+            return fuelType;
+        }
+
+        /// <summary>
         /// Get the value the Method 'GetFuelTypeName' from the 'fuelType'.
         /// </summary>
         /// <returns></returns>

@@ -73,6 +73,10 @@ namespace Petrolstation.Businesslogic
             Save();
         }
 
+        /// <summary>
+        /// Do the fuelling progress.
+        /// </summary>
+        /// <returns></returns>
         public int Fuelling()
         {
             amountToPay += (selectedTap.GetPricePerLiter()*((double)tankSpeed/1000));
@@ -89,6 +93,24 @@ namespace Petrolstation.Businesslogic
         public double GetAmountToPay()
         {
             return amountToPay;
+        }
+
+        /// <summary>
+        /// Get the value of 'selectedTap'.
+        /// </summary>
+        /// <returns></returns>
+        public Tap GetSelectedTap()
+        {
+            return selectedTap;
+        }
+
+        /// <summary>
+        /// Get the value of 'alreadyFuelledVolume'.
+        /// </summary>
+        /// <returns></returns>
+        public int GetAlreadyFuelledVolume()
+        {
+            return alreadyFuelledVolume;
         }
 
         /// <summary>

@@ -15,6 +15,7 @@ namespace Petrolstation.Businesslogic
         private double amountToPay; // in Rp
         private int currentSelectedPumpId;
         private double returnMoney;
+        private double fuelCost;
 
         // Konstruktor
         public PayStation() : base()
@@ -45,12 +46,25 @@ namespace Petrolstation.Businesslogic
         public void SetAmountToPay(int ppumpId)
         {
             amountToPay = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(ppumpId).GetAmountToPay();
+            SetFuelCosts();
             Save();
         }
 
+        /// <summary>
+        /// Get the value of 'amountToPay'.
+        /// </summary>
+        /// <returns></returns>
         public double GetAmountToPay()
         {
             return amountToPay;
+        }
+
+        /// <summary>
+        /// Set the value of 'fuelCost' to the value of 'amountToPay'.
+        /// </summary>
+        private void SetFuelCosts()
+        {
+            fuelCost = amountToPay;
         }
 
         /// <summary>
@@ -74,7 +88,6 @@ namespace Petrolstation.Businesslogic
                 amountToPay = 0;
 
                 PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(currentSelectedPumpId).UnlockTaps();
-                CreateQuittance();
             }
             Save();
         }
@@ -84,8 +97,8 @@ namespace Petrolstation.Businesslogic
         /// </summary>
         private void CreateQuittance()
         {
-            // Do something
-
+            PetrolPump currentPetrolPump = PetrolStationObjectController.GetInstance().GetObjectInstance<PetrolPump>(currentSelectedPumpId);
+            Quittance Quittance = new Quittance(fuelCost, currentPetrolPump.GetAlreadyFuelledVolume(), currentPetrolPump.GetSelectedTap().GetFueltype());
         }
 
         /// <summary>
