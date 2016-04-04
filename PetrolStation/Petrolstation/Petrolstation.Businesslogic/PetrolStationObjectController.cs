@@ -50,7 +50,13 @@ namespace Petrolstation.Businesslogic
 
         public void AddInstance(PetrolStationObject ppetrolStationObject)
         {
-            int id = petrolStationObjectInstances.Count(x => x.GetType() == ppetrolStationObject.GetType()) + 1;
+            int id = 0;
+            bool idIsUsed = true;
+            while(id == idIsUsed)
+            {
+                id++;
+                idIsUsed = petrolStationObjectInstances.Exists(x => x.GetType() == ppetrolStationObject.GetType() && x.GetId() == id);
+            }
             ppetrolStationObject.SetId(id);
             petrolStationObjectInstances.Add(ppetrolStationObject);
         }
