@@ -34,11 +34,10 @@ class Fueltank {
 	- maxlevel : int
 	- fuelLevel : int
 	- lowCriticalVolumePercent : decimal
-	- isCritical : bool
 	+ FuelTank(ptankVolume : int, plowCriticalVolumePercent : decimal, pfuelType : Fueltype)
-	+ DecreaseFuelLevel(pamount : int)
+	+ DecreaseFuelLevel(pamount : int) : bool
 	+ FillUp()
-	+ CheckIfCritical()
+	+ CheckIfCritical() : bool
 	+ GetPricePerLiter() : int
     + GetFuelType() : Fueltype
 	+ GetFuelTypeName() : string
@@ -97,7 +96,7 @@ class PetrolPump {
 	+ Fuelling() : int
 	+ GetAmountToPay() : double
 	+ GetSelectedTap() : Tap
-    + GetAlreadyFuelledVolume() : int
++ GetAlreadyFuelledVolume() : int
 	+ UnlockTap()
 	+ ResetAmountToPay()
 	+ SetVolumeToNull()
@@ -133,7 +132,7 @@ class Tap {
 	+ Lock()
 	+ Unlock()
 	+ IsLocked() : bool
-	+ DecreaseFuelLevelOfTank(pamount : int)
+	+ DecreaseFuelLevelOfTank(pamount : int) : bool
 	+ GetPricePerLiter() : int
 	+ GetFuelTypeName() : string
     + GetFueltype() : Fueltype
