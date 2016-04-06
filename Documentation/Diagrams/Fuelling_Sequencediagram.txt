@@ -1,0 +1,13 @@
+PetrolPump->Tap: selectedTap.GetPricePerLiter()
+Tap->FuelTank: fueltank.GetPricePerLiter()
+FuelTank->FuelType : fuelType.GetPricePerLiter()
+FuelType-->FuelTank : return pricePerLiter 
+FuelTank-->Tap : return fuelType.GetPricePerLiter() 
+Tap-->PetrolPump : return fueltank.GetPricePerLiter()
+PetrolPump->Tap : selectedTap.DecreaseFuelLevelOfTank(tankspeed) 
+Tap->FuelTank : fuelTank.DecreaseFuelLevel(pamount)
+FuelTank->FuelTank : CheckIfCritical()
+FuelTank-->FuelTank : return isCritical
+FuelTank-->Tap : return isCritical
+Tap-->PetrolPump : return isCritical
+PetrolPump->PetrolPump : Save()
