@@ -53,9 +53,10 @@ namespace Petrolstation.Businesslogic
         /// Call the method 'DecreaseFuelLevel' from 'fuelTank'.
         /// </summary>
         /// <param name="pamount"></param>
-        public void DecreaseFuelLevelOfTank(int pamount)
+        public bool DecreaseFuelLevelOfTank(int pamount)
         {
-            fuelTank.DecreaseFuelLevel(pamount);
+            bool isCritical = fuelTank.DecreaseFuelLevel(pamount);
+            return isCritical;
         }
 
         /// <summary>

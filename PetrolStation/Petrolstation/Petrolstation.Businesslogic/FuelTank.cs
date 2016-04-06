@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,6 @@ namespace Petrolstation.Businesslogic
         private int fuelLevel;
         private decimal lowCriticalVolumePercent;
         private Fueltype fuelType;
-        private bool isCritical = false;
 
         // Constructor
         public FuelTank(int ptankVolume, decimal plowCriticalVolumePercent, Fueltype pfuelType)
@@ -32,13 +32,17 @@ namespace Petrolstation.Businesslogic
         /// Decrease the actual value of 'fuelLevel'.
         /// </summary>
         /// <param name="pamount">The amount in milliliters</param>
-        public void DecreaseFuelLevel(int pamount)
+        public bool DecreaseFuelLevel(int pamount)
         {
             fuelLevel = fuelLevel - pamount;
-            CheckIfCritical();
+            bool isCritical = CheckIfCritical();
             Save();
+            return isCritical;
         }
 
+        /// <summary>
+        /// Fill up the fuelLevel of the tank.
+        /// </summary>
         public void FillUp()
         {
             fuelLevel = maxLevel;
@@ -71,24 +75,22 @@ namespace Petrolstation.Businesslogic
         }
 
         /// <summary>
-        /// Get the value of 'IsCritical'.
-        /// </summary>
-        /// <returns></returns>
-        public bool GetIsCritical()
-        {
-            return isCritical;
-        }
-
-        /// <summary>
         /// Check if the fuelLevel critical or not.
         /// </summary>
-        private void CheckIfCritical()
+        private bool CheckIfCritical()
         {
             decimal fuelLevelPercent = 100 / maxLevel * fuelLevel;
+            bool isCritical;
             if (fuelLevelPercent <= lowCriticalVolumePercent)
             {
                 isCritical = true;
             }
+            else
+            {
+                isCritical = false;
+            }
+            return isCritical;
+
         }
     }
 }

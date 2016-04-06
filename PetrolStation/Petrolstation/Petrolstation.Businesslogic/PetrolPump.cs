@@ -80,7 +80,11 @@ namespace Petrolstation.Businesslogic
         public int Fuelling()
         {
             amountToPay += (selectedTap.GetPricePerLiter()*((double)tankSpeed/1000));
-            selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
+            bool isCritical = selectedTap.DecreaseFuelLevelOfTank(tankSpeed);
+            if (isCritical)
+            {
+                throw new Exception("Fuellevel is Critical.");
+            }
             alreadyFuelledVolume += tankSpeed;
             Save();
             return alreadyFuelledVolume;
