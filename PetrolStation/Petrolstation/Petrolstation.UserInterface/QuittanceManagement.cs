@@ -42,12 +42,19 @@ namespace Petrolstation.UserInterface
 
         static internal void ListAllEarnings()
         {
-            
+            ReasonWhyThisIsNotImplemented();
         }
 
         static internal void LitersTankedPerFueltype()
         {
-            
+            ReasonWhyThisIsNotImplemented();            
+        }
+
+        static internal void ReasonWhyThisIsNotImplemented()
+        {
+            Console.WriteLine("This part of our fantastic console application is still in progress and can be bought by a following DLC");
+            Console.WriteLine("The logic is already implemented in our business logic.");
+            Console.ReadLine();
         }
     }
 }
