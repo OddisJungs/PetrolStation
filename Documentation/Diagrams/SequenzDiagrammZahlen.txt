@@ -1,0 +1,77 @@
+UI -> Paystation : SetAmountToPay(ppumpId)
+activate Paystation
+Paystation -> PetrolStationObjectController : GetInstance()
+activate PetrolStationObjectController
+PetrolStationObjectController --> Paystation : petrolStationControllerInstance 
+deactivate PetrolStationObjectController
+Paystation -> PetrolStationObjectController : GetObjectInstance<PetrolPump>(ppumpId)
+activate PetrolStationObjectController
+PetrolStationObjectController --> Paystation : petrolpump
+deactivate PetrolStationObjectController
+Paystation -> PetrolPump : GetAmountToPay()
+activate PetrolPump
+PetrolPump --> Paystation : amountToPay
+deactivate PetrolPump
+Paystation --> UI :
+deactivate Paystation
+UI --> Paystation : GetAmountToPay()
+activate Paystation
+Paystation --> UI : amountToPay
+deactivate Paystation
+loop amountToPay >= 0
+    UI -> Paystation : PayMoney(coinInput)
+    activate Paystation
+    Paystation --> UI : 
+    alt coin is valid
+        Paystation -> MoneyContainer : IncreaseCount()
+        activate MoneyContainer
+        MoneyContainer --> Paystation :
+        deactivate MoneyContainer
+    end
+    alt amountToPay <=0
+        Paystation -> PetrolStationObjectController : GetInstance()
+        activate PetrolStationObjectController
+        PetrolStationObjectController --> Paystation : petrolStationControllerInstance 
+        deactivate PetrolStationObjectController
+        Paystation -> PetrolStationObjectController : GetObjectInstance<PetrolPump>(ppumpId)
+        activate PetrolStationObjectController
+        PetrolStationObjectController --> Paystation : petrolpump
+        deactivate PetrolStationObjectController
+        Paystation -> PetrolPump : UnlockTaps()
+        activate PetrolPump
+        PetrolPump --> Paystation :
+        PetrolPump -> PetrolPump : Save()
+        PetrolPump --> Paystation :
+        deactivate PetrolPump        
+    end
+    Paystation -> Paystation : Save()
+    Paystation --> UI :
+   deactivate Paystation
+end
+
+UI -> Paystation : GetAmountToPay()
+activate Paystation
+PayStation --> UI : amountToPay
+deactivate Paystation
+alt amountToPay < 0
+    UI -> Paystation : ReturnBackMoney()
+    Paystation -> UI : backmoney
+end
+UI -> PetrolStationObjectController :
+activate PetrolStationObjectController
+PetrolStationObjectController --> UI : petrolStationControllerInstance 
+deactivate PetrolStationObjectController
+UI -> PetrolStationObjectController : GetObjectInstance<PetrolPump>(ppumpId)
+activate PetrolStationObjectController
+PetrolStationObjectController --> UI : petrolpump
+deactivate PetrolStationObjectController
+UI -> PetrolPump : setVolumeToNull()
+activate PetrolPump
+PetrolPump --> UI :
+deactivate PetrolPump
+
+
+
+
+
+
