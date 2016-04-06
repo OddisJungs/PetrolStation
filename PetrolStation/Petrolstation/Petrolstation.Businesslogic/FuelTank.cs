@@ -81,7 +81,9 @@ namespace Petrolstation.Businesslogic
         {
             decimal fuelLevelPercent = 100 / maxLevel * fuelLevel;
             bool isCritical;
-            if (fuelLevelPercent <= lowCriticalVolumePercent)
+            Tuple<double, int> earningsAndTankedOfLastYearMonth = new DataContainer().GetEarningsOfTimespan(fuelType, DateTime.Now.AddYears(-1),
+                DateTime.Now.AddYears(-1).AddMonths(1));
+            if (fuelLevelPercent <= lowCriticalVolumePercent && earningsAndTankedOfLastYearMonth.Item2 < 1 || earningsAndTankedOfLastYearMonth.Item2 > fuelLevel)
             {
                 isCritical = true;
             }

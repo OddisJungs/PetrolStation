@@ -18,7 +18,8 @@ class DataContainer {
 	- path : string
 	+ DataContainer()
 	+ Load<type>() : List<type>
-    + GetEarningsSinceDate(pfueltype : Fueltype, pminDate:DateTime) : Tuple<int, int>
+	+ GetEarningsOfSinceDate(pfueltype : Fueltype, pminDate : DateTime)
+    + GetEarningsSinceDate(pfueltype : Fueltype, pminDate:DateTime) : Tuple<double, int>
 }
 
 class DataItem {
@@ -39,7 +40,7 @@ class Fueltank {
 	+ FillUp()
 	+ CheckIfCritical()
 	+ GetPricePerLiter() : int
-        + GetFuelType() : Fueltype
+    + GetFuelType() : Fueltype
 	+ GetFuelTypeName() : string
 	+ GetIsCritical() : bool
 }
@@ -135,7 +136,7 @@ class Tap {
 	+ DecreaseFuelLevelOfTank(pamount : int)
 	+ GetPricePerLiter() : int
 	+ GetFuelTypeName() : string
-        + GetFueltype() : Fueltype
+    + GetFueltype() : Fueltype
 	+ GetId() : int
 }
 Tap "1" --o "1" Fueltank

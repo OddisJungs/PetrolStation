@@ -43,12 +43,24 @@ namespace Petrolstation.Businesslogic
         }
 
         /// <summary>
-        /// Returns the tanked milliliters of the timespan
+        /// Returns the earnings and the tanked milliliters of the timespan
         /// </summary>
         /// <param name="pfueltype"></param>
         /// <param name="pminDate"></param>
         /// <returns>Tuple(Eraned Money, Milliliterstanked)</returns>
-        public Tuple<double, int> GetEarningsSinceDate(Fueltype pfueltype, DateTime pminDate)
+        public Tuple<double, int> GetEarningsOfSinceDate(Fueltype pfueltype, DateTime pminDate)
+        {
+            return GetEarningsOfTimespan(pfueltype, pminDate, DateTime.Now);
+        }
+
+        /// <summary>
+        /// Returns the earnings and the tanked milliliters of the timespan
+        /// </summary>
+        /// <param name="pfueltype"></param>
+        /// <param name="pminDate"></param>
+        /// <param name="pmaxDate"></param>
+        /// <returns>Tuple(Eraned Money, Milliliterstanked)</returns>
+        public Tuple<double, int> GetEarningsOfTimespan(Fueltype pfueltype, DateTime pminDate, DateTime pmaxDate)
         {
             string filespath = Path.Combine(path, typeof(Quittance).Name);
             int milliliterstanked = 0;
